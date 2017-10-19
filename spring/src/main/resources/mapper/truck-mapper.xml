@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.repository.TruckRepository">
+	
+	<insert id="insert" parameterType="Truck">
+		insert into truck (t_id , t_name , t_food , t_comment , t_open, t_close, t_local, t_address, t_member) 
+		values (#{t_id},#{t_name},#{t_food},#{t_comment},#{t_open},#{t_close},#{t_local},#{t_address},#{t_member})
+	</insert>
+	<update id="update" parameterType="Truck">
+		update truck 
+		set t_name=#{t_name}, t_food=#{t_food}, t_comment=#{t_comment}, 
+		t_open=#{t_open}, t_close=#{t_close}, t_local=#{t_local}, t_address=#{t_address} 
+		where t_id=#{t_id}
+	</update>
+	<delete id="delete" parameterType="String">
+		delete from truck where t_id=#{t_id}
+	</delete>
+	
+	<select id="selectAll" resultType="Truck">
+		select * from truck
+	</select>
+	<select id="selectAddress" parameterType="String" resultType="Truck">
+		select * from truck where t_address=#{t_address}
+	</select>
+	
+</mapper>
