@@ -1,68 +1,102 @@
 package com.example.demo.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@Setter
+@Getter
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class Food {
 
-	private int f_id;
-	private String f_name;
-	private String f_price;
-	private String f_image;
-	private String f_material;
-	private String f_description;
-	private String f_truck;
-	public int getF_id() {
-		return f_id;
-	}
-	public void setF_id(int f_id) {
-		this.f_id = f_id;
-	}
-	public String getF_name() {
-		return f_name;
-	}
-	public void setF_name(String f_name) {
-		this.f_name = f_name;
-	}
-	public String getF_price() {
-		return f_price;
-	}
-	public void setF_price(String f_price) {
-		this.f_price = f_price;
-	}
-	public String getF_image() {
-		return f_image;
-	}
-	public void setF_image(String f_image) {
-		this.f_image = f_image;
-	}
-	public String getF_material() {
-		return f_material;
-	}
-	public void setF_material(String f_material) {
-		this.f_material = f_material;
-	}
-	public String getF_description() {
-		return f_description;
-	}
-	public void setF_description(String f_description) {
-		this.f_description = f_description;
-	}
-	public String getF_truck() {
-		return f_truck;
-	}
-	public void setF_truck(String f_truck) {
-		this.f_truck = f_truck;
-	}
-	public Food(int f_id, String f_name, String f_price, String f_image, String f_material, String f_description,
-			String f_truck) {
-		super();
-		this.f_id = f_id;
-		this.f_name = f_name;
-		this.f_price = f_price;
-		this.f_image = f_image;
-		this.f_material = f_material;
-		this.f_description = f_description;
-		this.f_truck = f_truck;
-	}
+	private int fId;
+	private String fName;
+	private String fPrice;
+	private String fImage;
+	private String fMaterial;
+	private String fDescription;
+	private String fTruck;
 
-	
+//	public Food() {
+//		// TODO Auto-generated constructor stub
+//	}
+//
+//	public Food(int fId, String fName, String fPrice, String fImage, String fMaterial, String fDescription,
+//			String fTruck) {
+//		super();
+//		this.fId = fId;
+//		this.fName = fName;
+//		this.fPrice = fPrice;
+//		this.fImage = fImage;
+//		this.fMaterial = fMaterial;
+//		this.fDescription = fDescription;
+//		this.fTruck = fTruck;
+//	}
+//
+//	@Override
+//	public String toString() {
+//		return "Food [fId=" + fId + ", fName=" + fName + ", fPrice=" + fPrice + ", fImage=" + fImage + ", fMaterial="
+//				+ fMaterial + ", fDescription=" + fDescription + ", fTruck=" + fTruck + "]";
+//	}
+//
+//	public int getfId() {
+//		return fId;
+//	}
+//
+//	public void setfId(int fId) {
+//		this.fId = fId;
+//	}
+//
+//	public String getfName() {
+//		return fName;
+//	}
+//
+//	public void setfName(String fName) {
+//		this.fName = fName;
+//	}
+//
+//	public String getfPrice() {
+//		return fPrice;
+//	}
+//
+//	public void setfPrice(String fPrice) {
+//		this.fPrice = fPrice;
+//	}
+//
+//	public String getfImage() {
+//		return fImage;
+//	}
+//
+//	public void setfImage(String fImage) {
+//		this.fImage = fImage;
+//	}
+//
+//	public String getfMaterial() {
+//		return fMaterial;
+//	}
+//
+//	public void setfMaterial(String fMaterial) {
+//		this.fMaterial = fMaterial;
+//	}
+//
+//	public String getfDescription() {
+//		return fDescription;
+//	}
+//
+//	public void setfDescription(String fDescription) {
+//		this.fDescription = fDescription;
+//	}
+//
+//	public String getfTruck() {
+//		return fTruck;
+//	}
+//
+//	public void setfTruck(String fTruck) {
+//		this.fTruck = fTruck;
+//	}
 
 }

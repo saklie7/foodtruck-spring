@@ -12,15 +12,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.backup.TruckRepositoryImpl;
 import com.example.demo.domain.Member;
 import com.example.demo.domain.Truck;
 import com.example.demo.repository.TruckRepository;
-import com.example.demo.repository.TruckRepositoryImpl;
 
 @RestController
 public class TruckController {
 	@Autowired
-	private TruckRepositoryImpl truckRepository;
+	private TruckRepository truckRepository;
 	
 	@PostMapping(value={"/trucks"}, consumes={MediaType.APPLICATION_JSON_VALUE})
 	public String add(@RequestBody Truck truck) {
@@ -34,7 +34,7 @@ public class TruckController {
 	@PostMapping(value = { "/trucks/{t_id}" }, consumes = { MediaType.APPLICATION_JSON_VALUE })
 	public Object modify(@RequestBody Truck truck) {
 		truckRepository.update(truck);
-		return truckRepository.findOneById(truck.getT_id());
+		return truckRepository.findOneById(truck.getTFood());
 	}
 	
 	@DeleteMapping("/trucks/{t_id}")

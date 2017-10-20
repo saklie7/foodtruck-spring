@@ -1,59 +1,91 @@
 package com.example.demo.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@Setter
+@Getter
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class Support {
 
-	private int s_id;
-	private String s_title;
-	private String s_content;
-	private String s_date;
-	private int s_registype;
-	private String s_member;
-	public int getS_id() {
-		return s_id;
-	}
-	public void setS_id(int s_id) {
-		this.s_id = s_id;
-	}
-	public String getS_title() {
-		return s_title;
-	}
-	public void setS_title(String s_title) {
-		this.s_title = s_title;
-	}
-	public String getS_content() {
-		return s_content;
-	}
-	public void setS_content(String s_content) {
-		this.s_content = s_content;
-	}
-	public String getS_date() {
-		return s_date;
-	}
-	public void setS_date(String s_date) {
-		this.s_date = s_date;
-	}
-	public int getS_registype() {
-		return s_registype;
-	}
-	public void setS_registype(int s_registype) {
-		this.s_registype = s_registype;
-	}
-	public String getS_member() {
-		return s_member;
-	}
-	public void setS_member(String s_member) {
-		this.s_member = s_member;
-	}
-	public Support(int s_id, String s_title, String s_content, String s_date, int s_registype, String s_member) {
-		super();
-		this.s_id = s_id;
-		this.s_title = s_title;
-		this.s_content = s_content;
-		this.s_date = s_date;
-		this.s_registype = s_registype;
-		this.s_member = s_member;
-	}
-	
-	
-	
+	private int sId;
+	private String sTitle;
+	private String sContent;
+	private String sDate;
+	private int sRegistype;
+	private String sMember;
+//
+//	public Support() {
+//		// TODO Auto-generated constructor stub
+//	}
+//
+//	public Support(int sId, String sTitle, String sContent, String sDate, int sRegistype, String sMember) {
+//		super();
+//		this.sId = sId;
+//		this.sTitle = sTitle;
+//		this.sContent = sContent;
+//		this.sDate = sDate;
+//		this.sRegistype = sRegistype;
+//		this.sMember = sMember;
+//	}
+//
+//	@Override
+//	public String toString() {
+//		return "Support [sId=" + sId + ", sTitle=" + sTitle + ", sContent=" + sContent + ", sDate=" + sDate
+//				+ ", sRegistype=" + sRegistype + ", sMember=" + sMember + "]";
+//	}
+//
+//	public int getsId() {
+//		return sId;
+//	}
+//
+//	public void setsId(int sId) {
+//		this.sId = sId;
+//	}
+//
+//	public String getsTitle() {
+//		return sTitle;
+//	}
+//
+//	public void setsTitle(String sTitle) {
+//		this.sTitle = sTitle;
+//	}
+//
+//	public String getsContent() {
+//		return sContent;
+//	}
+//
+//	public void setsContent(String sContent) {
+//		this.sContent = sContent;
+//	}
+//
+//	public String getsDate() {
+//		return sDate;
+//	}
+//
+//	public void setsDate(String sDate) {
+//		this.sDate = sDate;
+//	}
+//
+//	public int getsRegistype() {
+//		return sRegistype;
+//	}
+//
+//	public void setsRegistype(int sRegistype) {
+//		this.sRegistype = sRegistype;
+//	}
+//
+//	public String getsMember() {
+//		return sMember;
+//	}
+//
+//	public void setsMember(String sMember) {
+//		this.sMember = sMember;
+//	}
+
 }

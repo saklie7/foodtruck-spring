@@ -1,4 +1,4 @@
-package com.example.demo.repository;
+package com.example.backup;
 
 import java.util.List;
 
@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.domain.Truck;
+import com.example.demo.repository.TruckRepository;
 
 @Repository
 public class TruckRepositoryImpl implements TruckRepository {

@@ -1,37 +1,60 @@
 package com.example.demo.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@Setter
+@Getter
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class Hotlist {
 
-	
-	private int h_id;
-	private String h_member;
-	private String h_truck;
-	public int getH_id() {
-		return h_id;
-	}
-	public void setH_id(int h_id) {
-		this.h_id = h_id;
-	}
-	public String getH_member() {
-		return h_member;
-	}
-	public void setH_member(String h_member) {
-		this.h_member = h_member;
-	}
-	public String getH_truck() {
-		return h_truck;
-	}
-	public void setH_truck(String h_truck) {
-		this.h_truck = h_truck;
-	}
-	public Hotlist(int h_id, String h_member, String h_truck) {
-		super();
-		this.h_id = h_id;
-		this.h_member = h_member;
-		this.h_truck = h_truck;
-	}
+	private int hId;
+	private String hMember;
+	private String hTruck;
 
-
-	
+//	public Hotlist() {
+//		// TODO Auto-generated constructor stub
+//	}
+//
+//	public Hotlist(int hId, String hMember, String hTruck) {
+//		super();
+//		this.hId = hId;
+//		this.hMember = hMember;
+//		this.hTruck = hTruck;
+//	}
+//
+//	@Override
+//	public String toString() {
+//		return "Hotlist [hId=" + hId + ", hMember=" + hMember + ", hTruck=" + hTruck + "]";
+//	}
+//
+//	public int gethId() {
+//		return hId;
+//	}
+//
+//	public void sethId(int hId) {
+//		this.hId = hId;
+//	}
+//
+//	public String gethMember() {
+//		return hMember;
+//	}
+//
+//	public void sethMember(String hMember) {
+//		this.hMember = hMember;
+//	}
+//
+//	public String gethTruck() {
+//		return hTruck;
+//	}
+//
+//	public void sethTruck(String hTruck) {
+//		this.hTruck = hTruck;
+//	}
 
 }

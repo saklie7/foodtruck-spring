@@ -3,22 +3,23 @@
 <mapper namespace="com.example.demo.repository.MemberRepository">
 	
 	<insert id="insert" parameterType="Member">
-		insert into member (m_email, m_password, m_image, m_nickname, m_registype) values (#{m_email},#{m_password},#{m_image},#{m_nickname},#{m_registype})
+		insert into member (m_email, m_password, m_image, m_nickname, m_registype) 
+		values (#{mEmail},#{mPassword},#{mImage},#{mNickname},#{mRegistype})
 	</insert>
 	<update id="update" parameterType="Member">
-		update member set m_password=#{m_password}, m_image=#{m_image}, m_nickname=#{m_nickname} where m_email=#{m_email}
+		update member set m_password=#{mPassword}, m_image=#{mImage}, m_nickname=#{mNickname} where m_email=#{mEmail}
 	</update>
 	<delete id="delete" parameterType="String">
-		delete from member where m_email=#{m_email}
+		delete from member where m_email=#{mEmail}
 	</delete>
 	
 	<select id="isValidUser" parameterType="Member" resultType="boolean">
-		select count(1) from member where m_email=#{m_email} and m_password=#{m_password}
+		select count(1) from member where m_email=#{mEmail} and m_password=#{mPassword}
 	</select>
 	<select id="findAll" resultType="Member">
 		select * from member
 	</select>
 	<select id="findOneByEmail" parameterType="String" resultType="Member">
-		select * from member where m_email=#{m_email}
+		select * from member where m_email=#{mEmail}
 	</select>	
 </mapper>

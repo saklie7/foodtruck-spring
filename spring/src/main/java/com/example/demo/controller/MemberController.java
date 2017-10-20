@@ -15,14 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.backup.MemberRepositoryImpl;
 import com.example.demo.domain.Member;
 import com.example.demo.repository.MemberRepository;
-import com.example.demo.repository.MemberRepositoryImpl;
 
 @RestController
 public class MemberController {
 	@Autowired
-	private MemberRepositoryImpl memberRepository;
+	private MemberRepository memberRepository;
 
 	@PostMapping(value = { "/members" }, consumes = { MediaType.APPLICATION_JSON_VALUE })
 	public String add(@RequestBody Member member) {
@@ -38,8 +38,8 @@ public class MemberController {
 	@PostMapping(value = { "/members/{email}" }, consumes = { MediaType.APPLICATION_JSON_VALUE })
 	public Object modify(@RequestBody Member member) {
 		memberRepository.update(member);
-		System.out.println(memberRepository.findOneByEmail(member.getM_email()));
-		return memberRepository.findOneByEmail(member.getM_email());
+		System.out.println(memberRepository.findOneByEmail(member.getMEmail()));
+		return memberRepository.findOneByEmail(member.getMEmail());
 	}
 
 	@DeleteMapping("/members/{email}")
@@ -52,7 +52,7 @@ public class MemberController {
 	public Object login1(@RequestBody Member member, HttpSession session) {
 		System.out.println(memberRepository.isValidUser(member));
 		if (memberRepository.isValidUser(member)) {
-			session.setAttribute("email", member.getM_email());
+			session.setAttribute("email", member.getMEmail());
 			System.out.println(session.getAttribute("email"));
 			return session.getAttribute("email");
 		}

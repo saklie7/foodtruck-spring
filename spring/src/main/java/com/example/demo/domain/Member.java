@@ -6,52 +6,76 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+@Setter
+@Getter
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class Member {
-	
-	private String m_email;
-	private String m_password;
-	private String m_image;
-	private String m_nickname;
-	private int m_registype;
-	
-	
-	public String getM_email() {
-		return m_email;
-	}
-	public void setM_email(String m_email) {
-		this.m_email = m_email;
-	}
-	public String getM_password() {
-		return m_password;
-	}
-	public void setM_password(String m_password) {
-		this.m_password = m_password;
-	}
-	public String getM_image() {
-		return m_image;
-	}
-	public void setM_image(String m_image) {
-		this.m_image = m_image;
-	}
-	public String getM_nickname() {
-		return m_nickname;
-	}
-	public void setM_nickname(String m_nickname) {
-		this.m_nickname = m_nickname;
-	}
-	public int getM_registype() {
-		return m_registype;
-	}
-	public void setM_registype(int m_registype) {
-		this.m_registype = m_registype;
-	}
-	public Member(String m_email, String m_password, String m_image, String m_nickname, int m_registype) {
-		super();
-		this.m_email = m_email;
-		this.m_password = m_password;
-		this.m_image = m_image;
-		this.m_nickname = m_nickname;
-		this.m_registype = m_registype;
-	}
-	
+
+	private String mEmail;
+	private String mPassword;
+	private String mImage;
+	private String mNickname;
+	private int mRegistype;
+
+//	public Member() {
+//		// TODO Auto-generated constructor stub
+//	}
+//
+//	public Member(String mEmail, String mPassword, String mImage, String mNickname, int mRegistype) {
+//		super();
+//		this.mEmail = mEmail;
+//		this.mPassword = mPassword;
+//		this.mImage = mImage;
+//		this.mNickname = mNickname;
+//		this.mRegistype = mRegistype;
+//	}
+//
+//	@Override
+//	public String toString() {
+//		return "Member [mEmail=" + mEmail + ", mPassword=" + mPassword + ", mImage=" + mImage + ", mNickname="
+//				+ mNickname + ", mRegistype=" + mRegistype + "]";
+//	}
+//
+//	public String getmEmail() {
+//		return mEmail;
+//	}
+//
+//	public void setmEmail(String mEmail) {
+//		this.mEmail = mEmail;
+//	}
+//
+//	public String getmPassword() {
+//		return mPassword;
+//	}
+//
+//	public void setmPassword(String mPassword) {
+//		this.mPassword = mPassword;
+//	}
+//
+//	public String getmImage() {
+//		return mImage;
+//	}
+//
+//	public void setmImage(String mImage) {
+//		this.mImage = mImage;
+//	}
+//
+//	public String getmNickname() {
+//		return mNickname;
+//	}
+//
+//	public void setmNickname(String mNickname) {
+//		this.mNickname = mNickname;
+//	}
+//
+//	public int getmRegistype() {
+//		return mRegistype;
+//	}
+//
+//	public void setmRegistype(int mRegistype) {
+//		this.mRegistype = mRegistype;
+//	}
+
 }
