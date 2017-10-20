@@ -16,11 +16,17 @@
 		delete from truck where t_id=#{t_id}
 	</delete>
 	
-	<select id="selectAll" resultType="Truck">
+	<select id="findAll" resultType="Truck">
 		select * from truck
 	</select>
-	<select id="selectAddress" parameterType="String" resultType="Truck">
-		select * from truck where t_address=#{t_address}
+	<select id="findOneById" parameterType="String" resultType="Truck">
+		select * from truck where t_id=#{t_id}
 	</select>
+	<select id="findAllByAddr" parameterType="String" resultType="Truck">
+		select * from truck where t_address like concat('%',#{t_address},'%')
+	</select> 
+	<select id="findAllByFood" parameterType="String" resultType="Truck">
+		select * from truck where t_food like #{t_food}
+	</select> 
 	
 </mapper>

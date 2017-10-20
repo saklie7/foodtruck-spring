@@ -1,0 +1,70 @@
+create table member(
+	m_email varchar(50) primary key,
+	m_password varchar(50) not null,
+	m_image varchar(100),
+	m_nickname varchar(100),
+	m_registype int(5)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+create table truck(
+	t_id varchar(50) primary key,
+	t_name varchar(100) not null,
+	t_food varchar(100),
+	t_comment varchar(1000),
+	t_open varchar(100),
+	t_close varchar(100),
+	t_local varchar(500),
+	t_address varchar(500),
+	t_member varchar(50),
+	constraint t_member foreign key(t_member) references member(m_email) on delete cascade on update cascade
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+create table hotlist(
+	h_id int auto_increment primary key,
+	h_member varchar(50) not null,
+	constraint h_member foreign key(h_member) references member(m_email) on delete cascade on update cascade,
+	h_truck varchar(50) not null,
+	constraint h_truck foreign key(h_truck) references truck(t_id) on delete cascade on update cascade
+)ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+create table support(
+	s_id int primary key auto_increment,
+	s_title varchar(100) not null,
+	s_content varchar(1000),
+	s_date date not null,
+	s_registype int(5),
+	s_member varchar(50) not null,
+	constraint s_member foreign key(s_member) references member(m_email) on delete cascade on update cascade
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+create table canival(
+	c_id int primary key auto_increment,
+	c_title varchar(100) not null,
+	c_content varchar(1000) not null,
+	c_image varchar(100),
+	c_sdate varchar(100),
+	c_edate varchar(100)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+create table review(
+	r_id int primary key auto_increment,
+	r_comment varchar(1000),
+	r_avg int(10),
+	r_date date not null,
+	r_member varchar(50) not null,
+	constraint r_member foreign key(r_member) references member(m_email) on delete cascade,
+	r_truck varchar(50),
+	constraint r_truck foreign key(r_truck) references truck(t_id) on delete cascade
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+create table food(
+	f_id int primary key auto_increment,
+	f_name varchar(50) not null,
+	f_price varchar(50) not null,
+	f_image varchar(100) not null,
+	f_material varchar(500) not null,
+	f_description varchar(500) not null,
+	f_truck varchar(50),
+	constraint f_truck foreign key(f_truck) references truck(t_id) on delete cascade
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+

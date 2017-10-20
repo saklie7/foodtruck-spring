@@ -42,7 +42,7 @@ public class MemberController {
 	}
 
 	@DeleteMapping("/members/{email}")
-	public void delete(@PathVariable String email) {
+	public void remove(@PathVariable String email) {
 		System.out.println(email);
 		memberRepository.delete(email);
 	}

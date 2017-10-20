@@ -15,10 +15,10 @@
 	<select id="isValidUser" parameterType="Member" resultType="boolean">
 		select count(1) from member where m_email=#{m_email} and m_password=#{m_password}
 	</select>
-	<select id="selectAll" resultType="Member">
+	<select id="findAll" resultType="Member">
 		select * from member
 	</select>
-	<select id="selectEmail" parameterType="String" resultType="Member">
+	<select id="findOneByEmail" parameterType="String" resultType="Member">
 		select * from member where m_email=#{m_email}
 	</select>	
 </mapper>
