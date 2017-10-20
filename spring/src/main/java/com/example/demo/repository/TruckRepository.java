@@ -15,5 +15,4 @@ public interface TruckRepository {
 	public List<Truck> findAll();
 	public Truck findOneById(String t_id);
 	public List<Truck> findAllByAddr(String t_address);
-	public List<Truck> findAllByFood(String t_food);
 }

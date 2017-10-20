@@ -17,11 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.domain.Member;
 import com.example.demo.repository.MemberRepository;
+import com.example.demo.repository.MemberRepositoryImpl;
 
 @RestController
 public class MemberController {
 	@Autowired
-	private MemberRepository memberRepository;
+	private MemberRepositoryImpl memberRepository;
 
 	@PostMapping(value = { "/members" }, consumes = { MediaType.APPLICATION_JSON_VALUE })
 	public String add(@RequestBody Member member) {

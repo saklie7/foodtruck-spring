@@ -43,10 +43,6 @@ public class TruckRepositoryImpl implements TruckRepository {
 		return truckRepository.findAllByAddr(tAddress);
 	}
 
-	@Override
-	public List<Truck> findAllByFood(String t_food) {
-		return truckRepository.findAllByFood(t_food);
-	}
 
 
 }

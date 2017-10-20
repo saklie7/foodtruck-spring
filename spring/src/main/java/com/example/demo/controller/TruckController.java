@@ -15,18 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.domain.Member;
 import com.example.demo.domain.Truck;
 import com.example.demo.repository.TruckRepository;
+import com.example.demo.repository.TruckRepositoryImpl;
 
 @RestController
 public class TruckController {
 	@Autowired
-	private TruckRepository truckRepository;
-	
-//	public int insert(Truck truck);
-//	public int update(Truck truck);
-//	public int delete(String t_id);
-//
-//	public List<Truck> findAll();
-//	public Member findAllByAddr(String t_address);
+	private TruckRepositoryImpl truckRepository;
 	
 	@PostMapping(value={"/trucks"}, consumes={MediaType.APPLICATION_JSON_VALUE})
 	public String add(@RequestBody Truck truck) {
@@ -54,14 +48,10 @@ public class TruckController {
 		return truckRepository.findAll();
 	}
 	
-	@GetMapping("/trucks/addr/{t_address}")
+	@GetMapping("/trucks/{t_address}")
 	public List<Truck> getAddress(@PathVariable String t_address) {
 		return truckRepository.findAllByAddr(t_address);
 	}
 	
-	@GetMapping("/trucks/food/{t_food}")
-	public List<Truck> getFood(@PathVariable String t_food) {
-		return truckRepository.findAllByFood(t_food);
-	}
 
 }
