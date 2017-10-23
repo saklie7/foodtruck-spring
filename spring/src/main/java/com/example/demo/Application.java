@@ -31,6 +31,8 @@ public class Application extends WebMvcConfigurerAdapter implements CommandLineR
 						"OPTIONS");
 				registry.addMapping("/trucks/**").allowedOrigins("*").allowedMethods("POST", "GET", "PUT", "DELETE",
 						"OPTIONS");
+				registry.addMapping("/reviews/**").allowedOrigins("*").allowedMethods("POST", "GET", "PUT", "DELETE",
+						"OPTIONS");
 			}
 
 		};

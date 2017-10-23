@@ -3,11 +3,11 @@
 <mapper namespace="com.example.demo.repository.ReviewRepository">
 	
 	<insert id="insert" parameterType="Review">
-		insert into review (r_comment, r_avg, r_date, r_member, r_truck) 
-		values (#{rComment}, #{rAvg}, CURDATE(), #{rMember}, #{rTruck});
+		insert into review (r_comment, r_score, r_date, r_member, r_truck) 
+		values (#{rComment}, #{rScore}, CURDATE(), #{rMember}, #{rTruck})
 	</insert>
 	<update id="update" parameterType="Review">
-		update review set r_comment=#{rComment}, r_avg=#{rAvg}, r_date=CURDATE() where r_id=#{rId}
+		update review set r_comment=#{rComment}, r_score=#{rScore}, r_date=CURDATE() where r_id=#{rId}
 	</update>
 	<delete id="delete" parameterType="String">
 		delete from review where r_id=#{rId}
@@ -23,6 +23,11 @@
 	</select>
 	<select id="findTruckReview" parameterType="String" resultType="Review">
 		select * from review where r_truck=#{rTruck} order by r_id desc
-	</select> 
+	</select>
+
+	<!-- <select id="findAvgByTruck" parameterType="String" resultType="float">
+		select round(avg(r_score), 1) from review where r_truck=${rTruck}
+	</select> -->
+	 
 	
 </mapper>

@@ -16,6 +16,7 @@ public class Truck {
 	private String tId;
 	private String tName;
 	private String tFood;
+	private Float tAvg;
 	private String tComment;
 	private String tOpen;
 	private String tClose;

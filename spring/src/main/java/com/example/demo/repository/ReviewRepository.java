@@ -12,11 +12,14 @@ public interface ReviewRepository {
 
 	public int update(Review review);// 코멘트랑 별점만 수정
 
-	public int delete(int r_id);
+	public int delete(int rId);
 
 	public List<Review> findAll();
 
-	public List<Review> findMyReview(String r_member); // 내가 쓴 리뷰
+	public List<Review> findMyReview(String rMember); // 내가 쓴 리뷰
 
-	public List<Review> findTruckReview(String r_truck); // 해당 트럭 리뷰
+	public List<Review> findTruckReview(String rTruck); // 해당 트럭 리뷰
+	
+//	public float findAvgByTruck(String rTruck); // 해당 트럭의 평균별점
+	
 }

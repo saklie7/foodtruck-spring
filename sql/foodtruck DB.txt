@@ -10,6 +10,7 @@ create table truck(
 	t_id varchar(50) primary key,
 	t_name varchar(100) not null,
 	t_food varchar(100),
+	t_avg decimal (10,1),
 	t_comment varchar(1000),
 	t_open varchar(100),
 	t_close varchar(100),
@@ -49,7 +50,7 @@ create table canival(
 create table review(
 	r_id int primary key auto_increment,
 	r_comment varchar(1000),
-	r_avg int(10),
+	r_score int(10),
 	r_date date not null,
 	r_member varchar(50) not null,
 	constraint r_member foreign key(r_member) references member(m_email) on delete cascade,

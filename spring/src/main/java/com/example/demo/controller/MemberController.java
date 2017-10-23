@@ -15,16 +15,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.backup.MemberRepositoryImpl;
 import com.example.demo.domain.Member;
 import com.example.demo.repository.MemberRepository;
 
 @RestController
+@RequestMapping("/members")
 public class MemberController {
 	@Autowired
 	private MemberRepository memberRepository;
 
-	@PostMapping(value = { "/members" }, consumes = { MediaType.APPLICATION_JSON_VALUE })
+	@PostMapping(value = { "" }, consumes = { MediaType.APPLICATION_JSON_VALUE })
 	public String add(@RequestBody Member member) {
 		try {
 			memberRepository.insert(member);
@@ -35,20 +35,20 @@ public class MemberController {
 		return "0";
 	}
 
-	@PostMapping(value = { "/members/{email}" }, consumes = { MediaType.APPLICATION_JSON_VALUE })
+	@PostMapping(value = { "/{email}" }, consumes = { MediaType.APPLICATION_JSON_VALUE })
 	public Object modify(@RequestBody Member member) {
 		memberRepository.update(member);
 		System.out.println(memberRepository.findOneByEmail(member.getMEmail()));
 		return memberRepository.findOneByEmail(member.getMEmail());
 	}
 
-	@DeleteMapping("/members/{email}")
+	@DeleteMapping("/{email}")
 	public void remove(@PathVariable String email) {
 		System.out.println(email);
 		memberRepository.delete(email);
 	}
 	
-	@RequestMapping(value = { "/members/login" }, method = RequestMethod.POST)
+	@PostMapping(value = { "/login" }, consumes = { MediaType.APPLICATION_JSON_VALUE })
 	public Object login1(@RequestBody Member member, HttpSession session) {
 		System.out.println(memberRepository.isValidUser(member));
 		if (memberRepository.isValidUser(member)) {
@@ -59,12 +59,12 @@ public class MemberController {
 		return "fail";
 	}
 
-	@GetMapping("/members")
+	@GetMapping("")
 	public List<Member> getAll() {
 		return memberRepository.findAll();
 	}
 
-	@GetMapping("/members/{email:.+}")
+	@GetMapping("/{email:.+}")
 	public Member getEmail(@PathVariable String email) {
 		System.out.println("getEmail() # m_email=" + email);
 		return memberRepository.findOneByEmail(email);

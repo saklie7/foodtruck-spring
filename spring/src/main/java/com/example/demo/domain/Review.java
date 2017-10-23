@@ -1,6 +1,5 @@
 package com.example.demo.domain;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import lombok.AllArgsConstructor;
@@ -18,29 +17,20 @@ public class Review {
 
 	private int rId;
 	private String rComment;
-	private int rAvg;
+	private int rScore;
 	private Date rDate;
 	private String rMember;
 	private String rTruck;
 	
-	public Review(String rComment, int rAvg, String rMember, String rTruck) {
+	public Review(String rComment, int rScore, String rMember, String rTruck) {
+		super();
 		this.rComment = rComment;
-		this.rAvg = rAvg;
+		this.rScore = rScore;
 		this.rMember = rMember;
 		this.rTruck = rTruck;
 	}
-	public Review(int rId, String rComment, int rAvg, String rMember, String rTruck) {
-		this.rId = rId;
-		this.rComment = rComment;
-		this.rAvg = rAvg;
-		this.rMember = rMember;
-		this.rTruck = rTruck;
-	}
-	public Review(int rId, String rComment, int rAvg) {
-		this.rId = rId;
-		this.rComment = rComment;
-		this.rAvg = rAvg;
-	}
+	
+	
 	
 //	public Review() {
 //	}

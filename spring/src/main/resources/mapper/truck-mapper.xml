@@ -26,4 +26,11 @@
 		select * from truck where t_address like concat('%',#{tAddress},'%')
 	</select> 
 	
+	<update id="updateAvg" parameterType="String">
+		 update truck set t_avg = (select round(avg(r_score), 1) from review where r_truck=#{tId}) where t_id=#{tId}
+		<!-- update truck set t_avg = ??? where t_id=${tId} -->
+	</update>
+	
+	
+	
 </mapper>

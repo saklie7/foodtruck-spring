@@ -18,19 +18,24 @@ import com.example.demo.domain.Review;
 public class ReviewRepositoryTest {
 	@Autowired
 	private ReviewRepository repo;
+	@Autowired
+	private TruckRepository repo2;
 	
 	@Test
 	public void testInsert() {
-		Review review = new Review("귿귿", 7, "bb@bb.com", "ee가1234");
+		Review review = new Review("귿귿", 5, "bb@bb.com", "ee가1234");
 		int num = repo.insert(review);
+		System.out.println("repo2.findOneById()="+repo2.findOneById("ee가1234"));;
+		repo2.updateAvg("ee가1234");
+		System.out.println("repo2.findOneById()====="+repo2.findOneById("ee가1234"));;
 		System.out.println("num="+num);
 	}
 
 	@Test
 	public void testUpdate() {
-		Review review = new Review(4, "귿ddssssd귿", 9);
-		int num = repo.update(review);
-		System.out.println("num="+num);
+//		Review review = new Review(4, "귿ddssssd귿", 9);
+//		int num = repo.update(review);
+//		System.out.println("num="+num);
 	}
 
 	@Test
