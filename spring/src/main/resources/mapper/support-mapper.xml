@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.example.demo.repository.SupportRepository">
+	
+	<insert id="insert" parameterType="Support">
+		insert into support(s_title,s_content,s_date,s_registype,s_member) 
+		values (#{sTitle},#{sContent},#{sDate},#{sRegistype},#{sMember})
+	</insert>
+	
+	<update id="update" parameterType="Support">
+		update support set s_title=#{sTitle}, s_content=#{sContent}, s_date=#{sDate}, s_registype=#{sRegistype}  
+		where s_member=#{sMember}
+	</update>
+	
+	<delete id="delete" parameterType="Support">
+		delete from support where s_title=#{sTitle}
+	</delete>
+	
+	<select id="findOneBySid" parameterType="int" resultType="Support">
+		select * from support where s_id=#{sId}
+	</select>	
+
+	<select id="findAll" resultType="Support">
+		select * from support
+	</select>
+	
+	<select id="findOneBySmember" parameterType="String" resultType="Support">
+		select * from support where s_Member=#{sMember}
+	</select>	
+
+</mapper>
