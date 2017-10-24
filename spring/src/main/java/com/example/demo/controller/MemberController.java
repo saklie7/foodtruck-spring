@@ -48,18 +48,7 @@ public class MemberController {
 		memberRepository.delete(email);
 	}
 	
-	@PostMapping(value = { "/login" }, consumes = { MediaType.APPLICATION_JSON_VALUE })
-	public Object login1(@RequestBody Member member, HttpSession session) {
-		System.out.println(memberRepository.isValidUser(member));
-		if (memberRepository.isValidUser(member)) {
-			session.setAttribute("email", member.getMEmail());
-			System.out.println(session.getAttribute("email"));
-			return session.getAttribute("email");
-		}
-		return "fail";
-	}
-
-	@GetMapping("")
+	@GetMapping
 	public List<Member> getAll() {
 		return memberRepository.findAll();
 	}
