@@ -12,6 +12,7 @@ public interface HotlistRepository {
 
 	public int delete(int hId);
 
+	public List<Hotlist> findAll();
 	public List<Hotlist> findAllByMember(String hMember);
 	
 }

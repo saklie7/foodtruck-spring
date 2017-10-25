@@ -11,12 +11,11 @@
 		delete from hotlist where h_id=#{hId}
 	</delete>
 	
+	<select id="findAll" resultType="Hotlist">
+		select * from hotlist
+	</select>
 	<select id="findAllByMember" parameterType="String" resultType="Hotlist">
 		select * from truck where t_id = (select h_truck from hotlist where h_member=#{hMember})
 	</select>
-<!--public int insert(Hotlist hotlist);
-
-	public int delete(int hId);
-
-	public List<Hotlist> findAllByMember(String hMember); -->
+	
 </mapper>

@@ -41,54 +41,11 @@ public class LoginController {
 		return login;
 	}
 	
-//	@PostMapping(value = { "/api" }, consumes = { MediaType.APPLICATION_JSON_VALUE })
-//	public String login(@RequestBody Login login, HttpSession session) {
-//		System.out.println("login() # login=" + login.getMEmail() + ", " + login.getMPassword());
-//		
-//		loginService.authenticate(login);
-//
-//		if (login.getMError() != null) {
-//			System.out.println("login.getMError()=" + login.getMError());
-//			
-//			return login.getMError();
-//		} else {
-//			Member m = memberRepository.findOneByEmail(login.getMEmail());
-//			
-//			session.setAttribute("currentUser", m);
-//			System.out.println("session.getAttribute() = " + session.getAttribute("currentMember"));
-//			
-//			return (String) session.getAttribute("currentUser");
-//		}
-//	}
-	
-//	@RequestMapping(
-//            value = "/login",
-//            method = RequestMethod.POST,
-//            produces = MediaType.APPLICATION_JSON_VALUE,
-//            consumes = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<?> login(@RequestBody Member member, HttpSession session) {
-//		System.out.println(member);
-//		System.out.println(StringUtils.isEmpty(member.getMEmail()));
-//        if (StringUtils.isEmpty(member.getMEmail()) || StringUtils.isEmpty(member.getMPassword())) {
-//        	System.out.println("1");
-//            return new ResponseEntity<>(new Member(), HttpStatus.OK);
-//        }
-//        if (memberRepository.findOneByEmailAndPassword(member.getMEmail(), member.getMPassword()) == null){
-//        	System.out.println("2");
-//        	return new ResponseEntity<>(new Member(), HttpStatus.OK);
-//        }
-//        System.out.println("3");
-//        Member m = memberRepository.findOneByEmail(member.getMEmail());
-//        System.out.println(m);
-//        session.setAttribute("member", m);
-//        return new ResponseEntity<>(session.getAttribute("member"), HttpStatus.OK);
-//    }
 	
 
 	@GetMapping("/logout")
 	public void getLogout(HttpSession session) {
 		session.removeAttribute("member");
-//		return null;
 	}
 
 }
