@@ -15,7 +15,7 @@
 		select * from hotlist
 	</select>
 	<select id="findAllByMember" parameterType="String" resultType="Hotlist">
-		select * from truck where t_id = (select h_truck from hotlist where h_member=#{hMember})
+		select * from hotlist where h_member=#{hMember}
 	</select>
 	
 </mapper>

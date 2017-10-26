@@ -30,7 +30,8 @@ public class HotlistRepositoryTest {
 
 	@Test
 	public void testFindAllByMember() {
-		repo.findAllByMember("bb@bb.com");
+		System.out.println(repo.findAllByMember("aa@aa.com"));
+		repo.findAllByMember("aa@aa.com");
 	}
 	
 	@Test

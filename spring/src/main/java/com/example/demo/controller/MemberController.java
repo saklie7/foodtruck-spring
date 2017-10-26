@@ -55,7 +55,7 @@ public class MemberController {
 
 	@GetMapping("/{email:.+}")
 	public Member getEmail(@PathVariable String email) {
-		System.out.println("getEmail() # m_email=" + email);
+		System.out.println("MemberController # getEmail() # m_email=" + email);
 		return memberRepository.findOneByEmail(email);
 	}
 
