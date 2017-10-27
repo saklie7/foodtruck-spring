@@ -25,11 +25,18 @@
 	<select id="findAllByAddr" parameterType="String" resultType="Truck">
 		select * from truck where t_address like concat('%',#{tAddress},'%')
 	</select> 
-	
+	<select id="findOneByMember" parameterType="String" resultType="Truck">
+		select * from truck where t_member=#{tMember}
+	</select> 
+
 	<update id="updateAvg" parameterType="String">
 		 update truck set t_avg = (select round(avg(r_score), 1) from review where r_truck=#{tId}) where t_id=#{tId}
 		<!-- update truck set t_avg = ??? where t_id=${tId} -->
 	</update>
+	
+	<update id="updateLocal" parameterType="Truck">
+		 update truck set t_local=#{tLocal} where t_id=#{tId}
+	</update> 
 	
 	
 	

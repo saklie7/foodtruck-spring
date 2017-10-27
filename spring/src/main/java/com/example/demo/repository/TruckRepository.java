@@ -19,10 +19,16 @@ public interface TruckRepository {
 	public Truck findOneById(String tId);
 
 	public List<Truck> findAllByAddr(String tAddress);
-	
-	//트럭의 평균값을 찾음
+
+	// 회원 아이티로 트럭찾기
+	public Truck findOneByMember(String tMember);
+
+	// 트럭의 평균값을 찾음
 	public int findAvgByTruck(String tId);
 
-	//트럭의 평균 평점을 업데이트
+	// 트럭의 평균 평점을 업데이트
 	public int updateAvg(String tId);
+
+	// 트럭의 위치만 업데이트
+	 public int updateLocal(Truck truck);
 }

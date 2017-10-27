@@ -22,9 +22,10 @@ public class Truck {
 	private String tClose;
 	private String tLocal;
 	private String tAddress;
+	private String tMember;
+	private String tError;
 //
 //	public Truck() {
-//		// TODO Auto-generated constructor stub
 //	}
 //
 //	public Truck(String tId, String tName, String tFood, String tComment, String tOpen, String tClose, String tLocal,

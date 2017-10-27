@@ -14,25 +14,36 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.domain.Truck;
 import com.example.demo.repository.TruckRepository;
+import com.example.demo.service.TruckService;
 
 @RestController
 @RequestMapping("/trucks")
 public class TruckController {
 	@Autowired
 	private TruckRepository truckRepository;
+	@Autowired
+	private TruckService truckService;
 	
 	@PostMapping(value={""}, consumes={MediaType.APPLICATION_JSON_VALUE})
-	public String add(@RequestBody Truck truck) {
-		try {
+	public Truck add(@RequestBody Truck truck) {
+		Truck t = truckService.checkTruckDuplicate(truck);
+		if (t.getTError() == null) {
 			truckRepository.insert(truck);
-		} catch (Exception e) {
+			return truck;
+		} else {
+			return t;
 		}
-		return null;
 	}
 	
-	@PostMapping(value = { "/{tId}" }, consumes = { MediaType.APPLICATION_JSON_VALUE })
+	@PostMapping(value = { "/update" }, consumes = { MediaType.APPLICATION_JSON_VALUE })
 	public Object modify(@RequestBody Truck truck) {
 		return truckRepository.findOneById(truck.getTFood());
+	}
+	
+	@PostMapping(value = { "/update/map" }, consumes = { MediaType.APPLICATION_JSON_VALUE })
+	public Object modifyLocal(@RequestBody Truck truck) {
+		return truckRepository.updateLocal(truck);
+//		return null;
 	}
 	
 	@DeleteMapping("/{tId}")

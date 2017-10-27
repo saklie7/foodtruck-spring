@@ -16,6 +16,7 @@ public class Hotlist {
 	private int hId;
 	private String hMember;
 	private String hTruck;
+	private String hError;
 
 	public Hotlist(String hMember, String hTruck) {
 		super();

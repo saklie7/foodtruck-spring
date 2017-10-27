@@ -4,42 +4,44 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import com.example.demo.domain.Hotlist;
-import com.example.demo.domain.Overlap;
 import com.example.demo.repository.HotlistRepository;
 
 @Service
-public class hotlistService {
+public class HotlistService {
 	@Autowired
 	private HotlistRepository hotlistRepository;
 	
-	public void checkOverlap(@RequestBody Overlap overlap) {
-		List<Hotlist> hotlist = hotlistRepository.findAllByMember(overlap.getHMember());
+	public Hotlist checkDuplicate(Hotlist hotlist) {
+		//회원이 즐겨찾기한 트럭의 정보를 모음
+		List<Hotlist> h = hotlistRepository.findAllByMember(hotlist.getHMember());
 		
-		if (hotlist == null) {
-			overlap.setHError(null);
+		if (h == null) {
+			System.out.println("1");
+			return hotlist;
 		} else {
-			for (int i = 0; i < hotlist.size(); i++) {
-				if(hotlist.get(i).getHTruck().equals(overlap.getHTruck())){
-					overlap.setHError("Cannot add the duplicated favorite truck.");
-				} else {
-					overlap.setHError(null);
-				}
+			for (int i = 0; i < h.size(); i++) {
+				if (h.get(i).getHTruck().equals(hotlist.getHTruck())) {
+					hotlist.setHError("Cannot add the duplicated favorite truck.");
+					System.out.println("2 ::"+hotlist);
+				} 
 			}
+			System.out.println("3::"+hotlist);
+			return hotlist;
 		}
 		
-		
-//		Member member = memberRepository.findOneByEmail(login.getMEmail());
+//		List<Hotlist> hotlist = hotlistRepository.findAllByMember(overlap.getHMember());
 //		
-//		if (member == null) {
-//			login.setMError("Email does not exist.");
+//		if (hotlist == null) {
+//			overlap.setHError(null);
 //		} else {
-//			if (!member.getMPassword().equals(login.getMPassword())) {
-//				login.setMError("Password is not correct.");
-//			} else {
-//				login.setMError(null);
+//			for (int i = 0; i < hotlist.size(); i++) {
+//				if(hotlist.get(i).getHTruck().equals(overlap.getHTruck())){
+//					overlap.setHError("Cannot add the duplicated favorite truck.");
+//				} else {
+//					overlap.setHError(null);
+//				}
 //			}
 //		}
 	}

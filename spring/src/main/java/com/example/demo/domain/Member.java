@@ -18,6 +18,7 @@ public class Member {
 	private String mImage;
 	private String mNickname;
 	private int mRegistype;
+	private String mError;
 
 //	public Member() {
 //		// TODO Auto-generated constructor stub
