@@ -18,6 +18,8 @@ public class Member {
 	private String mImage;
 	private String mNickname;
 	private int mRegistype;
+	
+	//이메일 중복일때 사용
 	private String mError;
 
 //	public Member() {

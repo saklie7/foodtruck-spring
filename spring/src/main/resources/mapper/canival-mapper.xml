@@ -4,8 +4,8 @@
 <mapper namespace="com.example.demo.repository.CanivalRepository">
 	
 	<insert id="insert" parameterType="Canival">
-		insert into canival(c_title, c_content, c_image, c_sdate, c_edate) 
-		values (#{cTitle},#{cContent},#{cImage},#{cSdate},#{cEdate})
+		insert into canival(c_title, c_content, c_image, c_sdate, c_edate, c_viewcnt) 
+		values (#{cTitle},#{cContent},#{cImage},#{cSdate},#{cEdate},#{cViewcnt})
 	</insert>
 	
 	<update id="update" parameterType="Canival">

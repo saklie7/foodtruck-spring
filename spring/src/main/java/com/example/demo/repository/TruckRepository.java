@@ -11,12 +11,15 @@ public interface TruckRepository {
 	public int insert(Truck truck);
 
 	public int update(Truck truck);
+	
+	// 트럭의 위치만 업데이트
+	 public int updateLocal(Truck truck);
 
-	public int delete(String tId);
+	public int delete(int tId);
 
 	public List<Truck> findAll();
 
-	public Truck findOneById(String tId);
+	public Truck findOneById(int tId);
 
 	public List<Truck> findAllByAddr(String tAddress);
 
@@ -24,11 +27,10 @@ public interface TruckRepository {
 	public Truck findOneByMember(String tMember);
 
 	// 트럭의 평균값을 찾음
-	public int findAvgByTruck(String tId);
+	public int findAvgByTruck(int tId);
 
 	// 트럭의 평균 평점을 업데이트
-	public int updateAvg(String tId);
+	public int updateAvg(int tId);
 
-	// 트럭의 위치만 업데이트
-	 public int updateLocal(Truck truck);
+
 }

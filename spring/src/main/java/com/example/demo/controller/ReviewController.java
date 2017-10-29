@@ -57,7 +57,7 @@ public class ReviewController {
 
 	@GetMapping("/member/{r_member:.+}")
 	public List<Review> getMyReview(@PathVariable String r_member) {
-		return reviewRepository.findMyReview(r_member);
+		return reviewRepository.findMemberReview(r_member);
 	}
 	
 	@GetMapping("/truck/{r_truck}")

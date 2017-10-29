@@ -13,18 +13,18 @@ import lombok.ToString;
 @NoArgsConstructor
 public class Truck {
 
-	private String tId;
+	private int tId;
 	private String tName;
 	private String tFood;
-	private Float tAvg;
+	private double tAvg;
 	private String tComment;
 	private String tOpen;
 	private String tClose;
-	private String tLocal;
-	private String tAddress;
+	private double tLat;
+	private double tLng;
+	private String tFoodmaterial;
 	private String tMember;
-	private String tError;
-//
+
 //	public Truck() {
 //	}
 //

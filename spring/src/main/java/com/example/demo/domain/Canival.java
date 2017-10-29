@@ -19,6 +19,7 @@ public class Canival {
 	private String cImage;
 	private String cSdate;
 	private String cEdate;
+	private int cViewcnt;
 
 //	public Canival() {
 //		// TODO Auto-generated constructor stub

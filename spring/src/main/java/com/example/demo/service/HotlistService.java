@@ -22,7 +22,7 @@ public class HotlistService {
 			return hotlist;
 		} else {
 			for (int i = 0; i < h.size(); i++) {
-				if (h.get(i).getHTruck().equals(hotlist.getHTruck())) {
+				if (h.get(i).getHTruck() == (hotlist.getHTruck())) {
 					hotlist.setHError("Cannot add the duplicated favorite truck.");
 					System.out.println("2 ::"+hotlist);
 				} 

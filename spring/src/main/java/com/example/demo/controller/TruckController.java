@@ -21,25 +21,23 @@ import com.example.demo.service.TruckService;
 public class TruckController {
 	@Autowired
 	private TruckRepository truckRepository;
-	@Autowired
-	private TruckService truckService;
+//	@Autowired
+//	private TruckService truckService;
 	
 	@PostMapping(value={""}, consumes={MediaType.APPLICATION_JSON_VALUE})
 	public Truck add(@RequestBody Truck truck) {
-		Truck t = truckService.checkTruckDuplicate(truck);
-		if (t.getTError() == null) {
-			truckRepository.insert(truck);
-			return truck;
-		} else {
-			return t;
-		}
+		truckRepository.insert(truck);
+		//등록한 트럭 정보를 다시 클라이언트로 되돌려 줌.
+		return truck;
 	}
 	
+	//트럭 정보수정
 	@PostMapping(value = { "/update" }, consumes = { MediaType.APPLICATION_JSON_VALUE })
-	public Object modify(@RequestBody Truck truck) {
-		return truckRepository.findOneById(truck.getTFood());
+	public int modify(@RequestBody Truck truck) {
+		return truckRepository.update(truck);
 	}
 	
+	//트럭 위치수정
 	@PostMapping(value = { "/update/map" }, consumes = { MediaType.APPLICATION_JSON_VALUE })
 	public Object modifyLocal(@RequestBody Truck truck) {
 		return truckRepository.updateLocal(truck);
@@ -47,9 +45,9 @@ public class TruckController {
 	}
 	
 	@DeleteMapping("/{tId}")
-	public void remove(@PathVariable String tId) {
+	public int remove(@PathVariable int tId) {
 		System.out.println(tId+"를 삭제합니다.");
-		truckRepository.delete(tId);
+		return truckRepository.delete(tId);
 	}
 	
 	@GetMapping("")
@@ -58,7 +56,8 @@ public class TruckController {
 	}
 	
 	@GetMapping("/{tId}")
-	public Truck getTruckById(@PathVariable String tId) {
+	public Truck getTruckById(@PathVariable int tId) {
+		//트럭을 찾을 때, 평균값을 산출
 		truckRepository.updateAvg(tId);
 		System.out.println(truckRepository.findOneById(tId));
 		return truckRepository.findOneById(tId);

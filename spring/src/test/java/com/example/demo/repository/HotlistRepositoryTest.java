@@ -19,7 +19,7 @@ public class HotlistRepositoryTest {
 
 	@Test
 	public void testInsert() {
-		Hotlist hotlist = new Hotlist("bb@bb.com", "hh가1234");
+		Hotlist hotlist = new Hotlist("bb@bb.com", 1);
 		Hotlist h = checkService.checkDuplicate(hotlist);
 
 		if (h == null) {

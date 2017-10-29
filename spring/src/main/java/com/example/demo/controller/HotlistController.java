@@ -30,7 +30,8 @@ public class HotlistController {
 	private HotlistService checkService;
 
 	@PostMapping(value = { "/add" }, consumes = { MediaType.APPLICATION_JSON_VALUE })
-	public Object add(@RequestBody Hotlist hotlist) {
+	public Hotlist add(@RequestBody Hotlist hotlist) {
+		//중복체크
 		Hotlist resultHotlist = checkService.checkDuplicate(hotlist);
 		System.out.println("Controller # hotlist="+resultHotlist);
 		
@@ -49,20 +50,20 @@ public class HotlistController {
 
 	@GetMapping("/{hMember:.+}")
 	public List<Truck> getAllByMember(@PathVariable String hMember) {
-		List<Hotlist> list = hotlistRepository.findAllByMember(hMember);
-		List<Truck> t = new ArrayList<>();
+		List<Hotlist> hList = hotlistRepository.findAllByMember(hMember);
+		List<Truck> tList = new ArrayList<>();
 
 		// 로그인된 회원의 즐겨찾기 트럭의 상세목록 출력
-		for (int i = 0; i < list.size(); i++) {
-			String truck = list.get(i).getHTruck();
-			t.add(trucktRepository.findOneById(truck));
+		for (int i = 0; i < hList.size(); i++) {
+			int tId = hList.get(i).getHTruck();
+			tList.add(trucktRepository.findOneById(tId));
 		}
 
-		for (Truck truck : t) {
+		for (Truck truck : tList) {
 			System.out.println(truck);
 		}
 
-		return t;
+		return tList;
 		// return hotlistRepository.findAllByMember(hMember);
 	}
 

@@ -17,9 +17,8 @@ public class Food {
 	private String fName;
 	private String fPrice;
 	private String fImage;
-	private String fMaterial;
 	private String fDescription;
-	private String fTruck;
+	private int fTruck;
 
 //	public Food() {
 //		// TODO Auto-generated constructor stub

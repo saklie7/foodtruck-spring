@@ -18,7 +18,7 @@
 		select * from review order by r_id desc
 	</select>
 	
-	<select id="findMyReview" parameterType="String" resultType="Review">
+	<select id="findMemberReview" parameterType="String" resultType="Review">
 		select * from review where r_member=#{rMember} order by r_id desc
 	</select>
 	<select id="findTruckReview" parameterType="String" resultType="Review">

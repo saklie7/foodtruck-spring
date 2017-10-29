@@ -23,11 +23,11 @@ public class ReviewRepositoryTest {
 	
 	@Test
 	public void testInsert() {
-		Review review = new Review("귿귿", 5, "bb@bb.com", "ee가1234");
+		Review review = new Review("귿귿", 5, "ee@ee.com", 1);
 		int num = repo.insert(review);
-		System.out.println("repo2.findOneById()="+repo2.findOneById("ee가1234"));;
-		repo2.updateAvg("ee가1234");
-		System.out.println("repo2.findOneById()====="+repo2.findOneById("ee가1234"));;
+		System.out.println("repo2.findOneById()="+repo2.findOneById(1));;
+		repo2.updateAvg(1);
+		System.out.println("repo2.findOneById()====="+repo2.findOneById(1));;
 		System.out.println("num="+num);
 	}
 

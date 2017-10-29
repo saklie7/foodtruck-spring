@@ -11,14 +11,9 @@ public class TruckService {
 	@Autowired
 	private TruckRepository truckRepository;
 	
+	//auto-increment 사용으로 중복체크 필요없음
 	public Truck checkTruckDuplicate(Truck truck) {
-		Truck t = truckRepository.findOneByMember(truck.getTMember());
-		if (t != null) {
-			t.setTError("이미 등록된 트럭입니다.");
-			return t;
-		} else {
-			return truck;
-		}
+		return null;
 	}
 	
 }
