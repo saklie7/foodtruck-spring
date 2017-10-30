@@ -14,8 +14,15 @@
 	<select id="findAll" resultType="Hotlist">
 		select * from hotlist
 	</select>
-	<select id="findAllByMember" parameterType="String" resultType="Hotlist">
+	<select id="findHotlistByMember" parameterType="String" resultType="Hotlist">
 		select * from hotlist where h_member=#{hMember}
+	</select>
+	
+	<!-- 쿼리추가, dto추가  -->
+	<select id="findHotlistDetaileByMember" parameterType="String" resultType="Hotlisttruck">
+		select h.h_id, truck.*
+		from (select * from hotlist where hotlist.h_member=#{hMember})as h inner join truck
+		on h.h_truck = truck.t_id;
 	</select>
 	
 </mapper>

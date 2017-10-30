@@ -1,5 +1,7 @@
 package com.example.demo.repository;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.example.demo.domain.Hotlist;
+import com.example.demo.domain.Hotlisttruck;
 import com.example.demo.service.HotlistService;
 
 @RunWith(SpringRunner.class)
@@ -29,7 +32,7 @@ public class HotlistRepositoryTest {
 			System.out.println("Successful ");
 			System.out.println("affected= " + affected);
 		}
-		System.out.println(repo.findAllByMember("bb@bb.com"));
+		System.out.println(repo.findHotlistByMember("bb@bb.com"));
 	}
 
 	@Test
@@ -39,14 +42,22 @@ public class HotlistRepositoryTest {
 
 	@Test
 	public void testFindAllByMember() {
-		System.out.println(repo.findAllByMember("aa@aa.com"));
-		repo.findAllByMember("aa@aa.com");
+		System.out.println(repo.findHotlistByMember("aa@aa.com"));
+		 repo.findHotlistByMember("aa@aa.com");
 	}
 
 	@Test
 	public void testFindAll() {
 		repo.findAll();
 		System.out.println(repo.findAll());
+	}
+	
+	@Test
+	public void testFindHotlistDetaileByMember() {
+		List<Hotlisttruck> h = repo.findHotlistDetaileByMember("aa@aa.com");
+		for (Hotlisttruck hotlisttruck : h) {
+			System.out.println(hotlisttruck);
+		}
 	}
 
 }

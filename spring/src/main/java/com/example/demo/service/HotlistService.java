@@ -15,7 +15,7 @@ public class HotlistService {
 	
 	public Hotlist checkDuplicate(Hotlist hotlist) {
 		//회원이 즐겨찾기한 트럭의 정보를 모음
-		List<Hotlist> h = hotlistRepository.findAllByMember(hotlist.getHMember());
+		List<Hotlist> h = hotlistRepository.findHotlistByMember(hotlist.getHMember());
 		
 		if (h == null) {
 			System.out.println("1");

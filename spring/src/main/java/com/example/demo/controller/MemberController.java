@@ -24,14 +24,26 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 
-	@PostMapping(value = { "" }, consumes = { MediaType.APPLICATION_JSON_VALUE })
+	@PostMapping(value = { "/regist" }, consumes = { MediaType.APPLICATION_JSON_VALUE })
 	public Object add(@RequestBody Member member) {
-		Member m = memberService.checkUserDuplicate(member);
+		Member m = memberService.checkEmailDuplicate(member);
 		if (m.getMError() == null) {
-			memberRepository.insert(member);
-			return member;
+			memberRepository.insert(m);
+			System.out.println("회원가입");
+			return m;
 		} else {
 			return m;
+		}
+	}
+	
+	//이메일 중복체크
+	@PostMapping(value = { "/regist/check_email" }, consumes = { MediaType.APPLICATION_JSON_VALUE })
+	public String checkEmailDuplicate(@RequestBody Member member) {
+		Member m = memberService.checkEmailDuplicate(member);
+		if (m.getMError() == null) {
+			return "사용가능한 이메일입니다.";
+		} else {
+			return m.getMError();
 		}
 	}
 

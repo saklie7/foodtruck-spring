@@ -11,10 +11,10 @@ public class MemberService {
 	@Autowired
 	private MemberRepository memberRepository;
 	
-	public Member checkUserDuplicate(Member member) {
+	public Member checkEmailDuplicate(Member member) {
 		Member m = memberRepository.findOneByEmail(member.getMEmail());
 		if(m !=  null) {
-			m.setMError("이미 존재하는 이메일 주소입니다.");
+			m.setMError("이미 가입된 이메일입니다.");
 			return m;
 		} 
 		return member;

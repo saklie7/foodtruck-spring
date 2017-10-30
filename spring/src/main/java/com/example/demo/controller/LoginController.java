@@ -20,32 +20,32 @@ public class LoginController {
 
 	@Autowired
 	private MemberRepository memberRepository;
-	
+
 	@Autowired
 	private LoginService loginService;
-	
+
 	@PostMapping("/login")
 	public Object postMemberLogin(@RequestBody Login login, HttpSession session) {
-		System.out.println("1 : "+login);
-		loginService.authenticate(login);
+		 System.out.println("1 : "+login);
+		 loginService.authenticate(login);
 		
-		Member member = new Member();
+		 Member member = new Member();
 		
-		if(login.getMError() == null) {
+		if (login.getMError() == null) {
 			member = memberRepository.findOneByEmail(login.getMEmail());
-			System.out.println("loginController # member : " + member);
+			System.out.println("loginController # member 함: " + member);
 			session.setAttribute("member", member);
-			return member;
+			return session.getAttribute("member");
 		}
-		System.out.println("loginController # login : " + login);
-		return login;
+		System.out.println("loginController # login 못합 : " + login);
+		return "fail";
+
 	}
-	
-	
 
 	@GetMapping("/logout")
-	public void getLogout(HttpSession session) {
+	public String getLogout(HttpSession session) {
 		session.removeAttribute("member");
+		return "server logout";
 	}
 
 }
