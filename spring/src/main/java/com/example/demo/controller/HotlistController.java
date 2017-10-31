@@ -79,9 +79,14 @@ public class HotlistController {
 	}*/
 	
 	@DeleteMapping("/{hId}")
-	public void remove(@PathVariable int hId) {
-		hotlistRepository.delete(hId);
-		System.out.println("즐찾 삭제완료");
+	public String remove(@PathVariable int hId) {
+		int num = hotlistRepository.delete(hId);
+		System.out.println("num="+num);
+		if (num == 1) {
+			return "success";
+		} else {
+			return "fail";
+		}
 	}
 
 }

@@ -17,6 +17,7 @@ public class Review {
 
 	private int rId;
 	private String rComment;
+	private String rImage;
 	private int rScore;
 	private Date rDate;
 	private String rMember;

@@ -3,11 +3,11 @@
 <mapper namespace="com.example.demo.repository.ReviewRepository">
 	
 	<insert id="insert" parameterType="Review">
-		insert into review (r_comment, r_score, r_date, r_member, r_truck) 
-		values (#{rComment}, #{rScore}, CURDATE(), #{rMember}, #{rTruck})
+		insert into review (r_comment, r_image, r_score, r_date, r_member, r_truck) 
+		values (#{rComment}, #{rImage} #{rScore}, CURDATE(), #{rMember}, #{rTruck})
 	</insert>
 	<update id="update" parameterType="Review">
-		update review set r_comment=#{rComment}, r_score=#{rScore}, r_date=CURDATE() where r_id=#{rId}
+		update review set r_comment=#{rComment}, r_image=#{rImage} r_score=#{rScore}, r_date=CURDATE() where r_id=#{rId}
 	</update>
 	<delete id="delete" parameterType="String">
 		delete from review where r_id=#{rId}
