@@ -49,6 +49,7 @@ public class HotlistController {
 	
 	@GetMapping("/{hMember:.+}")
 	public List<Hotlisttruck> getAllByMember(@PathVariable String hMember) {
+		System.out.println(hMember+" hotlist 들림");
 		//트럭정보와 즐겨찾기 번호가 있음.(dto를 새로 생성)
 		return hotlistRepository.findHotlistDetaileByMember(hMember);
 	}

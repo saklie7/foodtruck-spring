@@ -25,21 +25,24 @@ public class ReviewController {
 	private TruckRepository truckRepository;
 	
 	@PostMapping(value = { "" }, consumes = { MediaType.APPLICATION_JSON_VALUE })
-	public String add(@RequestBody Review review) {
+	public Object add(@RequestBody Review review) {
 		try {
 			reviewRepository.insert(review);
-			truckRepository.updateAvg(review.getRTruck());//트럭의 총평점 update
-			return "1";
+			System.out.println("리뷰등록완료");
+			truckRepository.updateAvg(review.getRTruck());//리뷰 등록시, 트럭의 총평점 update
+			return "success";
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "0";
+		return "fail";
 	}
 	
 	@PostMapping(value = { "/{rId}" }, consumes = { MediaType.APPLICATION_JSON_VALUE })
 	public Object modify(@RequestBody Review review) {
 		reviewRepository.update(review);
-		truckRepository.updateAvg(review.getRTruck());//트럭의 총평점 update
+		System.out.println("리뷰등록완료");
+		truckRepository.updateAvg(review.getRTruck());//리뷰등록시, 트럭의 총평점 update
+		System.out.println("트럭평점등록완료");
 		
 		return reviewRepository.findAll();
 	}

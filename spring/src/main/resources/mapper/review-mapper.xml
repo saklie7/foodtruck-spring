@@ -4,7 +4,7 @@
 	
 	<insert id="insert" parameterType="Review">
 		insert into review (r_comment, r_image, r_score, r_date, r_member, r_truck) 
-		values (#{rComment}, #{rImage} #{rScore}, CURDATE(), #{rMember}, #{rTruck})
+		values (#{rComment}, #{rImage}, #{rScore}, CURDATE(), #{rMember}, #{rTruck})
 	</insert>
 	<update id="update" parameterType="Review">
 		update review set r_comment=#{rComment}, r_image=#{rImage} r_score=#{rScore}, r_date=CURDATE() where r_id=#{rId}

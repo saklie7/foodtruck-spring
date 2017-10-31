@@ -15,7 +15,7 @@ public interface ReviewRepository {
 	public int delete(int rId);
 
 	public List<Review> findAll();
-
+	
 	public List<Review> findMemberReview(String rMember); // 내가 쓴 리뷰
 
 	public List<Review> findTruckReview(String rTruck); // 해당 트럭 리뷰
