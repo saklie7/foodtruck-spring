@@ -57,6 +57,7 @@ public class ReviewController {
 
 	@GetMapping("/member/{r_member:.+}")
 	public List<Review> getMyReview(@PathVariable String r_member) {
+		System.out.println("들림 "+ r_member);
 		return reviewRepository.findMemberReview(r_member);
 	}
 	
