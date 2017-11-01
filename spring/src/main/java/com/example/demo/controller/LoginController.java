@@ -38,7 +38,7 @@ public class LoginController {
 			return session.getAttribute("member");
 		}
 		System.out.println("loginController # login 못합 : " + login);
-		return "fail";
+		return login;
 
 	}
 

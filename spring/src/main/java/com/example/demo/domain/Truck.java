@@ -15,13 +15,14 @@ public class Truck {
 
 	private int tId;
 	private String tName;
-	private String tFood;
+	private String tImage;;
 	private double tAvg;
 	private String tComment;
 	private String tOpen;
 	private String tClose;
 	private double tLat;
 	private double tLng;
+	private String tAddress;
 	private String tFoodmaterial;
 	private String tMember;
 

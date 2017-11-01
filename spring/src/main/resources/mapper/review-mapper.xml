@@ -9,7 +9,7 @@
 	<update id="update" parameterType="Review">
 		update review set r_comment=#{rComment}, r_image=#{rImage} r_score=#{rScore}, r_date=CURDATE() where r_id=#{rId}
 	</update>
-	<delete id="delete" parameterType="String">
+	<delete id="delete" parameterType="int">
 		delete from review where r_id=#{rId}
 	</delete>
 	

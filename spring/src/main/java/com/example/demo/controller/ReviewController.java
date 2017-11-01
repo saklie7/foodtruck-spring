@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.domain.Review;
 import com.example.demo.repository.ReviewRepository;
-import com.example.demo.repository.TruckRepository;
+import com.example.demo.repository.TruckRepositoryImpl;
 
 @RestController
 @RequestMapping("/reviews")
@@ -22,7 +22,7 @@ public class ReviewController {
 	@Autowired
 	private ReviewRepository reviewRepository;
 	@Autowired
-	private TruckRepository truckRepository;
+	private TruckRepositoryImpl truckRepository;
 	
 	@PostMapping(value = { "" }, consumes = { MediaType.APPLICATION_JSON_VALUE })
 	public Object add(@RequestBody Review review) {
@@ -48,9 +48,17 @@ public class ReviewController {
 	}
 	
 	@DeleteMapping("/{rId}")
-	public void remove(@PathVariable int rId) {
-		System.out.println(rId);
-		reviewRepository.delete(rId);
+	public String remove(@PathVariable int rId) {
+		System.out.println("review remove rId= " +rId);
+		
+		int num = reviewRepository.delete(rId);
+		System.out.println("num="+num);
+		
+		if (num == 1) {
+			return "success";
+		} else {
+			return "fail";
+		}
 	}
 	
 	@GetMapping("")
@@ -60,7 +68,7 @@ public class ReviewController {
 
 	@GetMapping("/member/{r_member:.+}")
 	public List<Review> getMyReview(@PathVariable String r_member) {
-		System.out.println("들림 "+ r_member);
+		System.out.println("review 들림 "+ r_member);
 		return reviewRepository.findMemberReview(r_member);
 	}
 	

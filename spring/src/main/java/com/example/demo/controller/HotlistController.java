@@ -32,7 +32,7 @@ public class HotlistController {
 	public Hotlist add(@RequestBody Hotlist hotlist) {
 		//중복체크
 		Hotlist resultHotlist = checkService.checkDuplicate(hotlist);
-		System.out.println("Controller # hotlist="+resultHotlist);
+//		System.out.println("Controller # hotlist="+resultHotlist);
 		
 		if (resultHotlist.getHError() == null) {
 			hotlistRepository.insert(resultHotlist);
@@ -49,40 +49,15 @@ public class HotlistController {
 	
 	@GetMapping("/{hMember:.+}")
 	public List<Hotlisttruck> getAllByMember(@PathVariable String hMember) {
-		System.out.println(hMember+" hotlist 들림");
+//		System.out.println(hMember+" hotlist 들림");
 		//트럭정보와 즐겨찾기 번호가 있음.(dto를 새로 생성)
 		return hotlistRepository.findHotlistDetaileByMember(hMember);
 	}
 	
-//	@GetMapping("/detail/{hMember:.+}")
-//	public List<Truck> getAllDetaukByMember(@PathVariable String hMember) {
-//		List<Hotlist> hList = hotlistRepository.findAllByMember(hMember);
-//		List<Truck> tList = new ArrayList<>();
-//
-//		// 로그인된 회원의 즐겨찾기 트럭의 상세목록 출력
-//		for (int i = 0; i < hList.size(); i++) {
-//			int tId = hList.get(i).getHTruck();
-//			tList.add(trucktRepository.findOneById(tId));
-//		}
-//
-//		for (Truck truck : tList) {
-//			System.out.println(truck);
-//		}
-//
-//		return tList;
-//		// return hotlistRepository.findAllByMember(hMember);
-//	}
-	
-/*@DeleteMapping("/{email}")
-	public void remove(@PathVariable String email) {
-		System.out.println(email);
-		memberRepository.delete(email);
-	}*/
-	
 	@DeleteMapping("/{hId}")
 	public String remove(@PathVariable int hId) {
 		int num = hotlistRepository.delete(hId);
-		System.out.println("num="+num);
+//		System.out.println("num="+num);
 		if (num == 1) {
 			return "success";
 		} else {
