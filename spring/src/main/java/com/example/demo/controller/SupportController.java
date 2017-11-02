@@ -44,8 +44,8 @@ public class SupportController {
 		return supportRepository.delete(support);
 	}
 
-	// findAll
-	@GetMapping
+//	 findAll
+	@GetMapping("/supports")
 	public List<Support> getAll() {
 		return supportRepository.findAll();
 	}

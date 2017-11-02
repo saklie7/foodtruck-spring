@@ -23,55 +23,70 @@ public class ReviewController {
 	private ReviewRepository reviewRepository;
 	@Autowired
 	private TruckRepositoryImpl truckRepository;
-	
+
 	@PostMapping(value = { "" }, consumes = { MediaType.APPLICATION_JSON_VALUE })
 	public Object add(@RequestBody Review review) {
-		try {
-			reviewRepository.insert(review);
+		int num = reviewRepository.insert(review);
+		int num2 = truckRepository.updateAvg(review.getRTruck());// 리뷰 등록시, 트럭의 총평점 update
+
+		if (num == 1) {
 			System.out.println("리뷰등록완료");
-			truckRepository.updateAvg(review.getRTruck());//리뷰 등록시, 트럭의 총평점 update
-			return "success";
-		} catch (Exception e) {
-			e.printStackTrace();
+			if (num2 == 1) {
+				System.out.println("avg update");
+				return "successful -- 1";
+			}
+			return "successful --2";
+		} else {
+			return "fail";
 		}
-		return "fail";
+
+		// try {
+		// reviewRepository.insert(review);
+		// System.out.println("리뷰등록완료");
+		// truckRepository.updateAvg(review.getRTruck());//리뷰 등록시, 트럭의 총평점
+		// update
+		// return "success";
+		// } catch (Exception e) {
+		// e.printStackTrace();
+		// }
+		// return "fail";
 	}
-	
+
 	@PostMapping(value = { "/{rId}" }, consumes = { MediaType.APPLICATION_JSON_VALUE })
 	public Object modify(@RequestBody Review review) {
 		reviewRepository.update(review);
-		System.out.println("리뷰등록완료");
-		truckRepository.updateAvg(review.getRTruck());//리뷰등록시, 트럭의 총평점 update
-		System.out.println("트럭평점등록완료");
-		
+		System.out.println("리뷰수정완료");
+		truckRepository.updateAvg(review.getRTruck());// 리뷰등록시, 트럭의 총평점 update
+		System.out.println("트럭평점수정완료");
+
 		return reviewRepository.findAll();
 	}
-	
+
 	@DeleteMapping("/{rId}")
 	public String remove(@PathVariable int rId) {
-		System.out.println("review remove rId= " +rId);
-		
+		System.out.println("review remove rId= " + rId);
+
 		int num = reviewRepository.delete(rId);
-		System.out.println("num="+num);
-		
+//		System.out.println("num=" + num);
+
 		if (num == 1) {
-			return "success";
+			return "deleted";
 		} else {
 			return "fail";
 		}
 	}
-	
+
 	@GetMapping("")
-	public List<Review> getAll(){
+	public List<Review> getAll() {
 		return reviewRepository.findAll();
 	}
 
 	@GetMapping("/member/{r_member:.+}")
 	public List<Review> getMyReview(@PathVariable String r_member) {
-		System.out.println("review 들림 "+ r_member);
+//		System.out.println("review 들림 " + r_member);
 		return reviewRepository.findMemberReview(r_member);
 	}
-	
+
 	@GetMapping("/truck/{r_truck}")
 	public List<Review> getTruckReview(@PathVariable String r_truck) {
 		return reviewRepository.findTruckReview(r_truck);

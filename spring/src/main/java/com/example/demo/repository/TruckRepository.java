@@ -10,7 +10,7 @@ import com.example.demo.domain.Truck;
 //@Mapper
 public interface TruckRepository {
 	public int insert(String name, String open, String close, String lat, String comment, String lng, String address,
-			MultipartFile file, String unique);
+			MultipartFile file, String unique, String email);
 	// public int insert(Truck truck);
 
 	public int update(Truck truck);

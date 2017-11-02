@@ -11,21 +11,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.domain.Truck;
-import com.example.demo.repository.TruckRepository;
+import com.example.demo.repository.TruckRepositoryImpl;
 import com.example.demo.service.StorageService;
 
 @RestController
 //@RequestMapping("/trucks")
 public class TruckController {
 	@Autowired
-	private TruckRepository truckRepository;
+	private TruckRepositoryImpl truckRepository;
 	
 	@Autowired
 	private StorageService storageService;
@@ -49,10 +47,9 @@ public class TruckController {
 			@RequestParam("comment") String comment,
 			@RequestParam("address") String address,
 			@RequestParam("file") MultipartFile file,
-			//추가
 			@RequestParam("email") String email
 			) {
-		
+		System.out.println("푸드트럭 컨트롤러 POST");
 		System.out.println(name);
 		System.out.println(open);
 		System.out.println(close);
@@ -61,10 +58,14 @@ public class TruckController {
 		System.out.println(comment);
 		System.out.println(address);
 		System.out.println(file);
+		System.out.println(email);
+		
 //		truckRepository.insert(name, open, close, lat, lng, file);
 		try {
-			storageService.store(name, open, close, lat,lng,comment,address,file);
+			System.out.println("-----------try------");
+			storageService.store(name, open, close, lat,lng,comment,address,file,email);
 		} catch (IOException e) {
+			System.out.println("-----------catch------");
 			e.printStackTrace();
 		}
 //		return truck;

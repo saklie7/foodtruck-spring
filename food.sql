@@ -19,7 +19,7 @@ select * from canival;
 create table member(
 	m_email varchar(50) primary key,
 	m_password varchar(50) not null,
-	m_image varchar(100),
+	m_image varchar(1000),
 	m_nickname varchar(100),
 	m_registype int(5)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -40,38 +40,41 @@ insert into member values ('jj@jj.com','jj','jj.jpg','JJ',1);
 create table truck(
    t_id int primary key auto_increment,
    t_name varchar(100) not null,
-   t_food varchar(100),
-   t_avg decimal(10, 1),
+   t_image varchar(1000),
+   t_avg decimal(10),
    t_comment varchar(1000),
    t_open varchar(100),
    t_close varchar(100),
    t_lat decimal(10,6),
    t_lng decimal(10,6),
+   t_address varchar(200),
    t_foodmaterial varchar(500),
    t_member varchar(50),
    constraint t_member foreign key(t_member) references member(m_email) on delete cascade on update cascade
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-insert into truck(t_name, t_food, t_avg, t_comment, t_open, t_close, t_lat, t_lng, t_foodmaterial, t_member) 
-   values ('aa의 맛집','핫도그', 0,'맛있는 핫도그', 'AM 11:00','PM 11:00 ',37.484868,126.897985,'원산지는 국산', 'aa@aa.com');
-insert into truck(t_name, t_food, t_avg, t_comment, t_open, t_close, t_lat, t_lng, t_foodmaterial, t_member) 
-   values ('bb의 맛집','핫도그', 0,'맛있는 핫도그', 'AM 11:00','PM 11:00 ',37.483242,126.899723,'원산지는 국산', 'bb@bb.com');
-insert into truck(t_name, t_food, t_avg, t_comment, t_open, t_close, t_lat, t_lng, t_foodmaterial, t_member) 
-   values ('cc의 맛집','핫도그', 0,'맛있는 핫도그', 'AM 11:00','PM 11:00 ',37.485000,126.899584,'원산지는 국산', 'cc@cc.com');
-insert into truck(t_name, t_food, t_avg, t_comment, t_open, t_close, t_lat, t_lng, t_foodmaterial, t_member) 
-   values ('dd의 맛집','핫도그', 0,'맛있는 핫도그', 'AM 11:00','PM 11:00 ',37.512941,126.926756,'원산지는 국산', 'dd@dd.com');
-insert into truck(t_name, t_food, t_avg, t_comment, t_open, t_close, t_lat, t_lng, t_foodmaterial, t_member) 
-   values ('ee의 맛집','핫도그', 0,'맛있는 핫도그', 'AM 11:00','PM 11:00 ',37.524516,126.919370,'원산지는 국산', 'ee@ee.com');
+insert into truck(t_name, t_image, t_avg, t_comment, t_open, t_close, t_lat, t_lng, t_address, t_foodmaterial, t_member) 
+   values ('aa의 맛집','d:/', 0,'맛있는 핫도그', 'AM 11:00','PM 11:00 ',37.484868,126.897985, '서울특별시 명동 서울국제금융센터', '원산지는 국산', 'aa@aa.com');
+insert into truck(t_name, t_image, t_avg, t_comment, t_open, t_close, t_lat, t_lng, t_address, t_foodmaterial, t_member) 
+   values ('bb의 맛집','d:/', 0,'맛있는 핫도그', 'AM 11:00','PM 11:00 ',37.483242,126.899723, '서울특별시 명동 서울국제금융센터','원산지는 국산', 'bb@bb.com');
+insert into truck(t_name, t_image, t_avg, t_comment, t_open, t_close, t_lat, t_lng, t_address, t_foodmaterial, t_member) 
+   values ('cc의 맛집','d:/', 0,'맛있는 핫도그', 'AM 11:00','PM 11:00 ',37.485000,126.899584, '서울특별시 명동 서울국제금융센터','원산지는 국산', 'cc@cc.com');
+insert into truck(t_name, t_image, t_avg, t_comment, t_open, t_close, t_lat, t_lng, t_address, t_foodmaterial, t_member) 
+   values ('dd의 맛집','d:/', 0,'맛있는 핫도그', 'AM 11:00','PM 11:00 ',37.512941,126.926756, '서울특별시 명동 서울국제금융센터','원산지는 국산', 'dd@dd.com');
+insert into truck(t_name, t_image, t_avg, t_comment, t_open, t_close, t_lat, t_lng, t_address, t_foodmaterial, t_member) 
+   values ('ee의 맛집','d:/', 0,'맛있는 핫도그', 'AM 11:00','PM 11:00 ',37.524516,126.919370, '서울특별시 명동 서울국제금융센터','원산지는 국산', 'ee@ee.com');
 
 
-
+#------------------------------
+insert into truck (t_name, t_open, t_close, t_lat, t_lng, t_address,t_comment, t_image, t_member) values 
+('ff의 맛집', 'am 9:00', 'pm 9:00', 37.524516, 126.919370, '서울', '맛집입니다.', null, 'ff@ff.com');
 
 
 #-------------------------------------
 create table review(
 	r_id int primary key auto_increment,
 	r_comment varchar(1000),
-	r_image varchar(500),
+	r_image varchar(1000),
 	r_score decimal(10),
 	r_date date not null,
 	r_member varchar(50) not null,
@@ -93,7 +96,7 @@ create table food(
 	f_id int primary key auto_increment,
 	f_name varchar(50) not null,
 	f_price varchar(50) not null,
-	f_image varchar(100) not null,
+	f_image varchar(1000) not null,
 	f_description varchar(500) not null,
 	f_truck int,
 	constraint f_truck foreign key(f_truck) references truck(t_id) on delete cascade
@@ -110,7 +113,7 @@ create table canival(
 	c_id int primary key auto_increment,
 	c_title varchar(100) not null,
 	c_content varchar(1000) not null,
-	c_image varchar(100),
+	c_image varchar(1000),
 	c_sdate varchar(100),
 	c_edate varchar(100),
 	c_viewcnt int

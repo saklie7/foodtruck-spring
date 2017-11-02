@@ -1,6 +1,5 @@
 package com.example.demo.repository;
 
-import java.net.MalformedURLException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.ResultSet;
@@ -8,8 +7,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -26,7 +23,6 @@ public class TruckRepositoryImpl implements TruckRepository {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
-	private final Path rootLocation = Paths.get("src/main/resources/static/image");
 
 	private RowMapper<Truck> rowMapper = new RowMapper<Truck>() {
 		@Override
@@ -36,7 +32,7 @@ public class TruckRepositoryImpl implements TruckRepository {
 			// Resource resource;
 			t.setTId(rs.getInt("t_id"));
 			t.setTName(rs.getString("t_name"));
-			t.setTImage(rs.getString("t_image"));
+			t.setTImage("localhost:8080/dist/image/" + rs.getString("t_image"));
 			t.setTAvg(rs.getDouble("t_avg"));
 			t.setTComment(rs.getString("t_comment"));
 			t.setTOpen(rs.getString("t_open"));
@@ -46,6 +42,7 @@ public class TruckRepositoryImpl implements TruckRepository {
 			t.setTAddress(rs.getString("t_address"));
 			t.setTFoodmaterial(rs.getString("t_foodmaterial"));
 			t.setTMember(rs.getString("t_member"));
+//			t.setTresource("localhost:8080/dist/image/" + rs.getString("t_image"));
 			// t.setResource(resource);
 			return t;
 		}
@@ -53,10 +50,10 @@ public class TruckRepositoryImpl implements TruckRepository {
 
 	@Override
 	public int insert(String name, String open, String close, String lat, String comment, String lng, String address,
-			MultipartFile file, String unique) {
-		String sql = "insert into truck (t_name, t_open, t_close, t_lat, t_lng, t_address,t_comment, t_image) values(?, ?,?, ?,?,?,?,?)";
+			MultipartFile file, String unique, String email) {
+		String sql = "insert into truck (t_name, t_open, t_close, t_lat, t_lng, t_address,t_comment, t_image, t_member) values(?,?,?,?,?,?,?,?,?)";
 		return jdbcTemplate.update(sql, name, open, close, Double.parseDouble(lat), Double.parseDouble(lng), address,
-				comment, "src/main/webapp/img" + unique + file.getOriginalFilename());
+				comment, "src/main/webapp/img" + unique + file.getOriginalFilename(), email);
 	}
 
 	@Override
