@@ -9,7 +9,7 @@ import com.example.demo.domain.Truck;
 
 //@Mapper
 public interface TruckRepository {
-	public int insert(String name, String open, String close, String lat, String comment, String lng, String address,
+	public int insert(String name, String open, String close, String lat, String lng, String comment, String address,
 			MultipartFile file, String unique, String email);
 	// public int insert(Truck truck);
 

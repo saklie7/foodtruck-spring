@@ -3,12 +3,13 @@ package com.example.demo.repository;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.domain.Review;
 
-@Mapper
+//@Mapper
 public interface ReviewRepository {
-	public int insert(Review review);
+	public int insert(String comment, MultipartFile image, String unique, String score, String email, String truck);
 
 	public int update(Review review);// 코멘트랑 별점만 수정
 
@@ -18,8 +19,8 @@ public interface ReviewRepository {
 	
 	public List<Review> findMemberReview(String rMember); // 내가 쓴 리뷰
 
-	public List<Review> findTruckReview(String rTruck); // 해당 트럭 리뷰
-	
+	public List<Review> findTruckReview(int rTruck); // 해당 트럭 리뷰
+
 //	public float findAvgByTruck(String rTruck); // 해당 트럭의 평균별점
 	
 }

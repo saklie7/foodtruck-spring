@@ -37,11 +37,15 @@ insert into member values ('jj@jj.com','jj','jj.jpg','JJ',1);
 
 #----------------------------------------
 
+
+
+
+
 create table truck(
    t_id int primary key auto_increment,
    t_name varchar(100) not null,
    t_image varchar(1000),
-   t_avg decimal(10),
+   t_avg decimal(10,1),
    t_comment varchar(1000),
    t_open varchar(100),
    t_close varchar(100),
@@ -164,5 +168,4 @@ insert into support(s_title,s_content,s_date,s_registype,s_member) values ('이�
 insert into support(s_title,s_content,s_date,s_registype,s_member) values ('이용관련문의6', '6-사업자이용관련문의드립니다.', '2017-10-23', '0', 'ff@ff.com');
 
 #-----------------------------------------------
-
-
+update truck set t_avg = (select round(avg(r_score), 1) from review where r_truck=1) where t_id=1;

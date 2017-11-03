@@ -17,16 +17,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.example.demo.repository.TruckRepository;
+import com.example.demo.repository.TruckRepositoryImpl;
 
 @Service
 public class StorageService {
 
 	@Autowired
-	TruckRepository truckRepository;
+	private TruckRepositoryImpl truckRepository;
 
 	Logger log = LoggerFactory.getLogger(this.getClass().getName());
-	private final Path rootLocation = Paths.get("src/main/resources/static/dist/image");
+	private final Path rootLocation = Paths.get("src/main/resources/static/image");
 //	private final Path rootLocation = Paths.get("D:/uploads");
 
 	long i = System.currentTimeMillis();

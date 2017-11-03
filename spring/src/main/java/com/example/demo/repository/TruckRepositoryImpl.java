@@ -32,7 +32,7 @@ public class TruckRepositoryImpl implements TruckRepository {
 			// Resource resource;
 			t.setTId(rs.getInt("t_id"));
 			t.setTName(rs.getString("t_name"));
-			t.setTImage("localhost:8080/dist/image/" + rs.getString("t_image"));
+			t.setTImage("localhost:8080/image/" + rs.getString("t_image"));
 			t.setTAvg(rs.getDouble("t_avg"));
 			t.setTComment(rs.getString("t_comment"));
 			t.setTOpen(rs.getString("t_open"));
@@ -42,18 +42,17 @@ public class TruckRepositoryImpl implements TruckRepository {
 			t.setTAddress(rs.getString("t_address"));
 			t.setTFoodmaterial(rs.getString("t_foodmaterial"));
 			t.setTMember(rs.getString("t_member"));
-//			t.setTresource("localhost:8080/dist/image/" + rs.getString("t_image"));
-			// t.setResource(resource);
+//			t.setTresource("localhost:8080/image/" + rs.getString("t_image"));
 			return t;
 		}
 	};
 
 	@Override
-	public int insert(String name, String open, String close, String lat, String comment, String lng, String address,
+	public int insert(String name, String open, String close, String lat, String lng, String comment, String address,
 			MultipartFile file, String unique, String email) {
 		String sql = "insert into truck (t_name, t_open, t_close, t_lat, t_lng, t_address,t_comment, t_image, t_member) values(?,?,?,?,?,?,?,?,?)";
 		return jdbcTemplate.update(sql, name, open, close, Double.parseDouble(lat), Double.parseDouble(lng), address,
-				comment, "src/main/webapp/img" + unique + file.getOriginalFilename(), email);
+				comment, unique + file.getOriginalFilename(), email);
 	}
 
 	@Override
@@ -130,7 +129,7 @@ public class TruckRepositoryImpl implements TruckRepository {
 	public int updateAvg(int tId) {
 		String sql = "update truck set t_avg = (select round(avg(r_score), 1) from review where r_truck=?) where t_id=?";
 //		return truckRepository.updateAvg(tId);
-		return jdbcTemplate.update(sql, rowMapper, tId, tId);
+		return jdbcTemplate.update(sql, tId, tId);
 	}
 
 }

@@ -22,13 +22,18 @@ public class Review {
 	private Date rDate;
 	private String rMember;
 	private int rTruck;
+	
+	private String rError;
 
 	public Review(String rComment, int rScore, String rMember, int rTruck) {
-		super();
 		this.rComment = rComment;
 		this.rScore = rScore;
 		this.rMember = rMember;
 		this.rTruck = rTruck;
+	}
+
+	public Review(String rError) {
+		this.rError = rError;
 	}
 
 	// public Review() {

@@ -63,7 +63,7 @@ public class TruckController {
 //		truckRepository.insert(name, open, close, lat, lng, file);
 		try {
 			System.out.println("-----------try------");
-			storageService.store(name, open, close, lat,lng,comment,address,file,email);
+			storageService.store(name, open, close, lat, lng, comment, address, file, email);
 		} catch (IOException e) {
 			System.out.println("-----------catch------");
 			e.printStackTrace();
@@ -94,7 +94,7 @@ public class TruckController {
 		return truckRepository.delete(tId);
 	}
 	
-	@GetMapping("/trucks/getalltrucks")
+	@GetMapping("/trucks")
 	public List<Truck> getAll() {
 		System.out.println(truckRepository.findAll());
 		 return truckRepository.findAll();
