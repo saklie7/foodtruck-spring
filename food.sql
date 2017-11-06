@@ -70,10 +70,6 @@ insert into truck(t_name, t_image, t_avg, t_comment, t_open, t_close, t_lat, t_l
 
 
 #------------------------------
-insert into truck (t_name, t_open, t_close, t_lat, t_lng, t_address,t_comment, t_image, t_member) values 
-('ff의 맛집', 'am 9:00', 'pm 9:00', 37.524516, 126.919370, '서울', '맛집입니다.', null, 'ff@ff.com');
-
-
 #-------------------------------------
 create table review(
 	r_id int primary key auto_increment,

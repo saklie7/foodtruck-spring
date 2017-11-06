@@ -9,18 +9,20 @@ import com.example.demo.domain.Review;
 
 //@Mapper
 public interface ReviewRepository {
+	
 	public int insert(String comment, MultipartFile image, String unique, String score, String email, String truck);
 
-	public int update(Review review);// 코멘트랑 별점만 수정
+	// 코멘트랑 별점만 수정 가능
+	public int update(Review review);
 
 	public int delete(int rId);
 
 	public List<Review> findAll();
 	
-	public List<Review> findMemberReview(String rMember); // 내가 쓴 리뷰
+	// 내가 쓴 리뷰
+	public List<Review> findMemberReview(String rMember); 
 
-	public List<Review> findTruckReview(int rTruck); // 해당 트럭 리뷰
+	// 해당 트럭 리뷰
+	public List<Review> findTruckReview(int rTruck); 
 
-//	public float findAvgByTruck(String rTruck); // 해당 트럭의 평균별점
-	
 }

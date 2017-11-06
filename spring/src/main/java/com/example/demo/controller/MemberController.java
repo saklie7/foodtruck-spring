@@ -47,24 +47,26 @@ public class MemberController {
 		}
 	}
 
-	@PostMapping(value = { "/{email}" }, consumes = { MediaType.APPLICATION_JSON_VALUE })
+	@PostMapping(value = { "/update/{email}" }, consumes = { MediaType.APPLICATION_JSON_VALUE })
 	public Object modify(@RequestBody Member member) {
 		memberRepository.update(member);
 		System.out.println(memberRepository.findOneByEmail(member.getMEmail()));
 		return memberRepository.findOneByEmail(member.getMEmail());
 	}
 
-	@DeleteMapping("/{email}")
+	@DeleteMapping("/delete/{email}")
 	public void remove(@PathVariable String email) {
 		System.out.println(email);
 		memberRepository.delete(email);
 	}
 
+	// 전체 회원 리스트 요청 메소드
 	@GetMapping
 	public List<Member> getAll() {
 		return memberRepository.findAll();
 	}
-
+	
+	// 특정 회원 정보 요청 메소드
 	@GetMapping("/{email:.+}")
 	public Member getEmail(@PathVariable String email) {
 		System.out.println("MemberController # getEmail() # m_email=" + email);

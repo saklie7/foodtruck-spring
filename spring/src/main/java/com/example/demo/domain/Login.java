@@ -12,6 +12,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Login {
+	
 	private String mEmail;
 	private String mPassword;
 	private String mError;

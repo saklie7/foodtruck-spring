@@ -78,16 +78,6 @@ public class TruckController {
 		return truckRepository.update(truck);
 	}
 	
-	@GetMapping("/trucks/{lat}/{lng}")
-	public List<Truck> address(@PathVariable double lat, @PathVariable double lng) {
-		int t = (int) lat;
-		int g = (int) lng;
-		System.out.println(truckRepository.find(t,g));
-		return truckRepository.find(t,g);
-		
-	}
-	
-	
 	@DeleteMapping("/trucks/{tId}")
 	public int remove(@PathVariable int tId) {
 		System.out.println(tId+"를 삭제합니다.");
@@ -114,6 +104,14 @@ public class TruckController {
 		truckRepository.updateAvg(tId);
 		System.out.println(truckRepository.findOneById(tId));
 		return truckRepository.findOneById(tId);
+	}
+	
+	@GetMapping("/trucks/member/{tMember:.+}")
+	public int getTruckByMember(@PathVariable String tMember) {
+//		truckRepository.findOneByMember(tMember);
+		System.out.println("tttttt");
+		System.out.println(truckRepository.findOneByMember(tMember).size());
+		return truckRepository.findOneByMember(tMember).size();
 	}
 	
 //	@GetMapping("/search/{t_address}")

@@ -46,6 +46,12 @@ public class Application extends WebMvcConfigurerAdapter {
 						"OPTIONS");
 				registry.addMapping("/hotlist/**").allowedOrigins("*").allowedMethods("POST", "GET", "PUT", "DELETE",
 						"OPTIONS");
+				registry.addMapping("/foods/**").allowedOrigins("*").allowedMethods("POST", "GET", "PUT", "DELETE",
+						"OPTIONS");
+				registry.addMapping("/canival/**").allowedOrigins("*").allowedMethods("POST", "GET", "PUT", "DELETE",
+						"OPTIONS");
+				registry.addMapping("/supports/**").allowedOrigins("*").allowedMethods("POST", "GET", "PUT", "DELETE",
+						"OPTIONS");
 			}
 
 		};

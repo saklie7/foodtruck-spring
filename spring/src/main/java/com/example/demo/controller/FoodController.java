@@ -1,46 +1,89 @@
 package com.example.demo.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.domain.Food;
-import com.example.demo.domain.Review;
 import com.example.demo.repository.FoodRepository;
+import com.example.demo.service.StorageService;
 
 @RestController
 @RequestMapping("/foods")
 public class FoodController {
 	@Autowired
 	private FoodRepository foodRepository;
+
+	@Autowired
+	private StorageService storageService;
 	
-	@PostMapping(value = { "" }, consumes = { MediaType.APPLICATION_JSON_VALUE })
-	public String add(@RequestBody Food food) {
+	//insert
+	@PostMapping("/post")
+	public ResponseEntity<String> add(
+			@RequestParam("name") String name, 
+			@RequestParam("price") String price,
+			@RequestParam("description") String description, 
+			@RequestParam("file") MultipartFile file,
+			@RequestParam("tid") int truck) {
+		System.out.println(name);
+		System.out.println(price);
+		System.out.println(description);
+		System.out.println(file);
+
 		try {
-			foodRepository.insert(food);
-			return "1";
-		} catch (Exception e) {
+			storageService.foodStore(name, price, description, file, truck);
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return "0";
+
+		return null;
 	}
 	
-	@PostMapping(value = { "/{fId}" }, consumes = { MediaType.APPLICATION_JSON_VALUE })
-	public Object modify(@RequestBody Food food) {
-		foodRepository.update(food);
+	//update
+	@PostMapping("/update/{fId}")
+	public Object modify(
+			@RequestParam("fid") int id, 
+			@RequestParam("name") String name,
+			@RequestParam("price") String price, 
+			@RequestParam("description") String description, 
+			@RequestParam("image") MultipartFile image) {
+		try {
+			storageService.foodStore(id, name, price, description, image);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		//리뷰를 수정하면 리뷰 리스트를 보여줘야하는데 이렇게 하남?				
-		return foodRepository.findOneById(food.getFId());
+		return "수정성공";
+	}
+	
+	//delete
+	@GetMapping("/delete/{fId}")
+	public Food delete(@PathVariable int fId) {
+		foodRepository.delete(fId);
+		return null;
 	}
 	
 	@GetMapping("/{fTruck}")
-	public List<Food> getAllByTruck(@PathVariable String fTruck) {
+	public List<Food> getAllByTruck(@PathVariable int fTruck) {
 		return foodRepository.findAllByTruck(fTruck);
 	}
+	
+	//트럭에 있는 푸드하나만 가져옴 :  추후 추가
+//	@GetMapping("/view/{fTruck}/{fId}")
+//	public Food getOneByTruck(@PathVariable int fTruck, @PathVariable int fId) {
+//		return foodRepository.findOneById(fId);
+//	}
+
+	
 }

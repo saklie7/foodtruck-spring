@@ -2,21 +2,26 @@ package com.example.demo.repository;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Mapper;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.domain.Canival;
 
-@Mapper
+//@Mapper
 public interface CanivalRepository {
 	
-	public int insert(Canival canival);
-	
+	public int insert(String title, String content, MultipartFile image, String unique, String sdate, String edate,
+			int viewcnt);
+
 	public int update(Canival canival);
 
 	public int delete(Canival canival);
-	
-	public List<Canival> findAll(); // 전체 축제 정보 가져와서 화면에 뿌릴 때
 
-	public Canival findOneByTitle(String cTitle); // 전체 축제 정보 중 특정 축제 검색할 때
+	// 전체 축제 글 리스트 볼 수 있는 페이지, 종료일 기준 역순으로 정렬
+	public List<Canival> selectAll();
 
+	//축제글번호로 조회
+	public Canival selectById(int cId);
+
+	// 조회수 증가 처리
+	public int increment(int cId);
 }

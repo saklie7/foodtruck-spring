@@ -18,7 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.demo.domain.Review;
 import com.example.demo.repository.ReviewRepositoryImpl;
 import com.example.demo.repository.TruckRepositoryImpl;
-import com.example.demo.service.ReviewService;
+import com.example.demo.service.StorageService;
 
 @RestController
 @RequestMapping("/reviews")
@@ -28,39 +28,10 @@ public class ReviewController {
 	@Autowired
 	private TruckRepositoryImpl truckRepository;
 	@Autowired
-	private ReviewService reviewService;
+	private StorageService storageService;
 	
 	
-	//리뷰등록(이미지 등록x)
-//	@PostMapping(value = { "" }, consumes = { MediaType.APPLICATION_JSON_VALUE })
-//	public Object add(@RequestBody Review review) {
-//		System.out.println(review);
-//		int num = reviewRepository.insert(review);
-//		System.out.println("리뷰등록완료");
-//		System.out.println(review.getRTruck());
-//
-//		if (num == 1) {
-//			truckRepository.updateAvg(review.getRTruck());// 리뷰 등록시, 트럭의 총평점 update
-//			System.out.println("avg update");
-//			return "successful -- 1";
-//		}
-//		return "successful --2";
-//
-//		// try {
-//		// reviewRepository.insert(review);
-//		// System.out.println("리뷰등록완료");
-//		// truckRepository.updateAvg(review.getRTruck());//리뷰 등록시, 트럭의 총평점
-//		// update
-//		// return "success";
-//		// } catch (Exception e) {
-//		// e.printStackTrace();
-//		// }
-//		// return "fail";
-//	}
-	
-	
-	//리뷰등록(이미지 등록o)
-	@PostMapping()
+	@PostMapping("/post")
 	public ResponseEntity<String> handleFileUpload(
 			@RequestParam("comment") String comment,
 			@RequestParam("image") MultipartFile image,
@@ -77,7 +48,7 @@ public class ReviewController {
 		
 		try {
 			System.out.println("-----------try------");
-			reviewService.store(comment, image, score, email, truck);
+			storageService.store(comment, image, score, email, truck);
 		} catch (Exception e) {
 			System.out.println("-----------catch------");
 			e.printStackTrace();
@@ -85,7 +56,7 @@ public class ReviewController {
 		return null;
 	}
 
-	@PostMapping(value = { "/{rId}" }, consumes = { MediaType.APPLICATION_JSON_VALUE })
+	@PostMapping(value = { "/update/{rId}" }, consumes = { MediaType.APPLICATION_JSON_VALUE })
 	public Object modify(@RequestBody Review review) {
 		reviewRepository.update(review);
 		System.out.println("리뷰수정완료");
@@ -95,13 +66,9 @@ public class ReviewController {
 		return reviewRepository.findAll();
 	}
 
-	@DeleteMapping("/{rId}")
+	@DeleteMapping("/delete/{rId}")
 	public String remove(@PathVariable int rId) {
-		System.out.println("review remove rId= " + rId);
-
 		int num = reviewRepository.delete(rId);
-//		System.out.println("num=" + num);
-
 		if (num == 1) {
 			return "deleted";
 		} else {
@@ -113,13 +80,14 @@ public class ReviewController {
 	public List<Review> getAll() {
 		return reviewRepository.findAll();
 	}
-
+	
+	//나의 리뷰
 	@GetMapping("/member/{r_member:.+}")
 	public List<Review> getMyReview(@PathVariable String r_member) {
-//		System.out.println("review 들림 " + r_member);
 		return reviewRepository.findMemberReview(r_member);
 	}
-
+	
+	//트럭 리뷰
 	@GetMapping("/truck/{r_truck}")
 	public List<Review> getTruckReview(@PathVariable int r_truck) {
 		List<Review> review = reviewRepository.findTruckReview(r_truck);
