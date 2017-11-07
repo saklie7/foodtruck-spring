@@ -28,16 +28,7 @@ public class TruckController {
 	@Autowired
 	private StorageService storageService;
 	
-//	@PostMapping(value={""}, consumes={MediaType.APPLICATION_JSON_VALUE})
-//	public Truck add(@RequestBody Truck truck) {
-//		truckRepository.insert(truck);
-//		//등록한 트럭 정보를 다시 클라이언트로 되돌려 줌.
-//		return truck;
-//	}
-	
 	@PostMapping("/trucks/post")
-//	@RequestMapping(value="/trucks/post" , method = {RequestMethod.GET, RequestMethod.POST})
-//	@PostMapping(value = { "/trucks/post" }, consumes = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<String> handleFileUpload(
 			@RequestParam("name") String name,
 			@RequestParam("open") String open,
@@ -107,11 +98,16 @@ public class TruckController {
 	}
 	
 	@GetMapping("/trucks/member/{tMember:.+}")
-	public int getTruckByMember(@PathVariable String tMember) {
+	public Object getTruckByMember(@PathVariable String tMember) {
 //		truckRepository.findOneByMember(tMember);
 		System.out.println("tttttt");
-		System.out.println(truckRepository.findOneByMember(tMember).size());
-		return truckRepository.findOneByMember(tMember).size();
+		Truck t =  truckRepository.findOneByMember(tMember);
+		if(t == null) {
+			System.out.println("tttttt");
+			return "0";
+		} else {
+			return t;
+		}
 	}
 	
 //	@GetMapping("/search/{t_address}")

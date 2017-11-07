@@ -26,8 +26,8 @@ public interface SupportRepository {
 	public Support findOneBySid(int sId); 
 	
 	// 문의 등록
-	@Insert("insert into support(s_id, s_title, s_content, s_date, s_registype, s_member) "
-			+ "values(#{sId}, #{sTitle}, #{sContent}, CURDATE(), #{sRegistype}, #{sMember})")
+	@Insert("insert into support(s_title, s_content, s_date, s_registype, s_member) "
+			+ "values(#{sTitle}, #{sContent}, CURDATE(), #{sRegistype}, #{sMember})")
 	public int insert(Support support); 
 	
 	// 문의 수정

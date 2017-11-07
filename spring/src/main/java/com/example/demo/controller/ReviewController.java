@@ -37,7 +37,7 @@ public class ReviewController {
 			@RequestParam("image") MultipartFile image,
 			@RequestParam("score") String score,
 			@RequestParam("email") String email,
-			@RequestParam("truck") String truck
+			@RequestParam("truck") int truck
 			) {
 		System.out.println("리뷰등록 POST");
 		System.out.println(comment);
@@ -49,10 +49,29 @@ public class ReviewController {
 		try {
 			System.out.println("-----------try------");
 			storageService.store(comment, image, score, email, truck);
+			truckRepository.updateAvg(truck);
 		} catch (Exception e) {
 			System.out.println("-----------catch------");
 			e.printStackTrace();
 		}
+		return null;
+	}
+	
+	@PostMapping("/post2")
+	public ResponseEntity<String> handleFileUpload2(
+			@RequestParam("comment") String comment,
+			@RequestParam("score") String score,
+			@RequestParam("email") String email,
+			@RequestParam("truck") int truck
+			) {
+		System.out.println("리뷰등록 POST");
+		System.out.println(comment);
+		System.out.println(score);
+		System.out.println(email);
+		System.out.println(truck);
+		
+		reviewRepository.insert2(comment, score, email, truck);
+		truckRepository.updateAvg(truck);
 		return null;
 	}
 

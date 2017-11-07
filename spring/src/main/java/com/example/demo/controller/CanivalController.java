@@ -29,23 +29,27 @@ public class CanivalController {
 
 	// insert
 	@PostMapping("/post")
-	public String add(
-			@RequestParam("title") String title, 
-			@RequestParam("content") String content,
-			@RequestParam("image") MultipartFile image, 
-			@RequestParam("sdate") String sdate,
-			@RequestParam("edate") String edate,
-			@RequestParam("viewcnt") int viewcnt
+	public Canival add(
+			@RequestParam("title") String cTitle, 
+			@RequestParam("content") String cContent,
+			@RequestParam("sdate") String cSdate,
+			@RequestParam("edate") String cEdate,
+			@RequestParam("image") MultipartFile cImage
 			) {
+		System.out.println(cTitle);
+		System.out.println(cContent);
+		System.out.println(cImage);
+		System.out.println(cSdate);
+		System.out.println(cEdate);
 		try {
-			storageService.store(title, content, image, sdate, edate, viewcnt);
+			storageService.store(cTitle, cContent, cImage, cSdate, cEdate);
 		} catch (Exception e) {
 		}
-		return null;
+		return canivalRepository.selectByMaxId();
 	}
 	
 	// update
-	@PostMapping("/update/{cId}")
+	@PostMapping("/update")
 	public Object modify(@RequestBody Canival canival) {
 		canivalRepository.update(canival);
 		return canivalRepository.selectById(canival.getCId());
@@ -67,6 +71,7 @@ public class CanivalController {
 	// findOneByTitle : 글내용 상세뷰
 	@GetMapping("/view/{cId}")
 	public Canival getTitle(@PathVariable int cId) {
+		System.out.println(cId);
 		return canivalRepository.selectById(cId);
 	}
 	

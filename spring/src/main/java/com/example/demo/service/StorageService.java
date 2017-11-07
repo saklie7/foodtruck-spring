@@ -33,7 +33,7 @@ public class StorageService {
 	private CanivalRepositoryImpl canivalRepository;
 	
 	Logger log = LoggerFactory.getLogger(this.getClass().getName());
-	private final Path rootLocation = Paths.get("src/main/resources/static/image");
+	private final Path rootLocation = Paths.get("src/main/webapp/image");
 	
 	// 트럭 insert
 	public void store(String name, String open, String close, String lat, String lng, String comment, String address,
@@ -57,7 +57,7 @@ public class StorageService {
 	}
 	
 	//리뷰 insert
-	public void store(String comment, MultipartFile image, String score, String email, String truck)
+	public void store(String comment, MultipartFile image, String score, String email, int truck)
 			throws IOException {
 		long i = System.currentTimeMillis();
 		
@@ -105,16 +105,32 @@ public class StorageService {
 		}
 	}
 
+//	// 축제 insert
+//	public void store(String title, String content, MultipartFile image, String sdate, String edate, int viewcnt)
+//			throws IOException {
+//		long i = System.currentTimeMillis();
+//
+//		try {
+//			String unique = String.valueOf(i);
+//			System.out.println("filename = " + image.getOriginalFilename());
+//			Files.copy(image.getInputStream(), rootLocation.resolve(unique + image.getOriginalFilename()));
+//			canivalRepository.insert(title, content, image, unique, sdate, edate, viewcnt);
+//
+//		} catch (Exception e) {
+//			System.out.println("중복중복!!");
+//			throw new RuntimeException("FAIL!");
+//		}
+//	}
+	
 	// 축제 insert
-	public void store(String title, String content, MultipartFile image, String sdate, String edate, int viewcnt)
+	public void store(String title, String content, MultipartFile image, String sdate, String edate)
 			throws IOException {
 		long i = System.currentTimeMillis();
-
 		try {
 			String unique = String.valueOf(i);
 			System.out.println("filename = " + image.getOriginalFilename());
 			Files.copy(image.getInputStream(), rootLocation.resolve(unique + image.getOriginalFilename()));
-			canivalRepository.insert(title, content, image, unique, sdate, edate, viewcnt);
+			canivalRepository.insert(title, content, image, unique, sdate, edate);
 
 		} catch (Exception e) {
 			System.out.println("중복중복!!");

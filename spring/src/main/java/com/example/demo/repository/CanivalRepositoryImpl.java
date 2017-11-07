@@ -26,7 +26,7 @@ public class CanivalRepositoryImpl implements CanivalRepository {
 			c.setCId(rs.getInt("c_id"));
 			c.setCTitle(rs.getString("c_title"));
 			c.setCContent(rs.getString("c_content"));
-			c.setCImage("localhost:8080/image/" + rs.getString("c_image"));
+			c.setCImage(rs.getString("c_image"));
 			c.setCSdate(rs.getString("c_sdate"));
 			c.setCEdate(rs.getString("c_edate"));
 			c.setCViewcnt(rs.getInt("c_viewcnt"));
@@ -36,11 +36,10 @@ public class CanivalRepositoryImpl implements CanivalRepository {
 	};
 
 	@Override
-	public int insert(String title, String content, MultipartFile image, String unique, String sdate, String edate,
-			int viewcnt) {
+	public int insert(String title, String content, MultipartFile image, String unique, String sdate, String edate) {
 		String sql = "insert into canival(c_title, c_content, c_image, c_sdate, c_edate, c_viewcnt) values (?,?,?,?,?,0)";
-		
-		return jdbcTemplate.update(sql, title, content, unique+image.getOriginalFilename(), sdate, edate);
+		System.out.println(sql);
+		return jdbcTemplate.update(sql, title, content, unique + image.getOriginalFilename(), sdate, edate);
 	}
 
 	@Override
@@ -51,7 +50,7 @@ public class CanivalRepositoryImpl implements CanivalRepository {
 
 	@Override
 	public int delete(Canival canival) {
-		String sql = "delete from canival where c_id = #{cId}";
+		String sql = "delete from canival where c_id = ?";
 		return 0;
 	}
 
@@ -65,6 +64,12 @@ public class CanivalRepositoryImpl implements CanivalRepository {
 	public Canival selectById(int cId) {
 		String sql = "select * from canival where c_id = ?";
 		return jdbcTemplate.queryForObject(sql, rowMapper, cId);
+	}
+	
+	@Override
+	public Canival selectByMaxId() {
+		String sql = "select * from canival where c_id=(select max(c_id) from canival)";
+		return jdbcTemplate.queryForObject(sql, rowMapper);
 	}
 	
 	@Override

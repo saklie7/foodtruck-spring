@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -72,7 +73,7 @@ public class TruckRepositoryImpl implements TruckRepository {
 
 	@Override
 	public List<Truck> findAll() {
-		String sql = "select * from truck";
+		String sql = "select * from truck order by t_id desc";
 		return jdbcTemplate.query(sql, rowMapper);
 	}
 
@@ -89,9 +90,14 @@ public class TruckRepositoryImpl implements TruckRepository {
 	}
 
 	@Override
-	public List<Truck> findOneByMember(String tMember) {
+	public Truck findOneByMember(String tMember) {
 		String sql = "select * from truck where t_member=?";
-		return jdbcTemplate.query(sql, rowMapper, tMember);
+		try {
+			return jdbcTemplate.queryForObject(sql, rowMapper, tMember);
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+		
 	}
 
 }

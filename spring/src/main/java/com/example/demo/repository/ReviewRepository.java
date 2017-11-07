@@ -10,7 +10,8 @@ import com.example.demo.domain.Review;
 //@Mapper
 public interface ReviewRepository {
 	
-	public int insert(String comment, MultipartFile image, String unique, String score, String email, String truck);
+	public int insert(String comment, MultipartFile image, String unique, String score, String email, int truck);
+	public int insert2(String comment, String score, String email, int truck);
 
 	// 코멘트랑 별점만 수정 가능
 	public int update(Review review);

@@ -4,13 +4,18 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import com.example.demo.domain.Truck;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class TruckRepositoryTest {
-
+	@Autowired
+	private TruckRepositoryImpl repo;
+	
 	@Test
 	public void testInsert() {
 		fail("Not yet implemented");
@@ -43,7 +48,8 @@ public class TruckRepositoryTest {
 
 	@Test
 	public void testFindOneByMember() {
-		fail("Not yet implemented");
+		Truck t = repo.findOneByMember("aa@aa.com");
+		System.out.println(t);
 	}
 
 	@Test

@@ -31,7 +31,7 @@ public interface TruckRepository {
 	public Truck findOneById(int tId);
 
 	// 사업자 아이디로 자기 트럭찾기
-	public List<Truck> findOneByMember(String tMember);
+	public Truck findOneByMember(String tMember);
 	
 	
 

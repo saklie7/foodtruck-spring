@@ -47,7 +47,7 @@ public class FoodRepositoryTest {
 	@Test
 	public void testFindAllByTruck() {
 		assertNotNull(repo);
-		List<Food> foods = repo.findAllByTruck(2);
+		List<Food> foods = repo.findAllByTruck(3);
 		for (Food f : foods) {
 			System.out.println(f);
 		}

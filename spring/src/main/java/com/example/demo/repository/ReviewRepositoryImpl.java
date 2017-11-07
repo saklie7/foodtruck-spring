@@ -25,7 +25,7 @@ public class ReviewRepositoryImpl implements ReviewRepository {
 			Review r = new Review();
 			r.setRId(rs.getInt("r_id"));
 			r.setRComment(rs.getString("r_comment"));
-			r.setRImage("localhost:8080/image/"+ rs.getString("r_image"));
+			r.setRImage(rs.getString("r_image"));
 			r.setRScore(rs.getInt("r_score"));
 			r.setRDate(rs.getDate("r_date"));
 			r.setRMember(rs.getString("r_member"));
@@ -37,10 +37,16 @@ public class ReviewRepositoryImpl implements ReviewRepository {
 	
 
 	@Override
-	public int insert(String comment, MultipartFile image, String unique, String score, String email, String truck) {
+	public int insert(String comment, MultipartFile image, String unique, String score, String email, int truck) {
 		String sql = "insert into review (r_comment, r_image, r_date, r_score, r_member, r_truck) "
 				+ "values (?,?, CURDATE(),?,?,?)";
 		return jdbcTemplate.update(sql, comment, unique + image.getOriginalFilename(), score, email, truck);
+	}
+	@Override
+	public int insert2(String comment, String score, String email, int truck) {
+		String sql = "insert into review (r_comment, r_date, r_score, r_member, r_truck) "
+				+ "values (?, CURDATE(),?,?,?)";
+		return jdbcTemplate.update(sql, comment, score, email, truck);
 	}
 
 	//미완성
