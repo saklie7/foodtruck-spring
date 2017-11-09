@@ -12,8 +12,14 @@ public interface TruckRepository {
 	public int insert(String name, String open, String close, String lat, String lng, String comment, String address,
 			MultipartFile file, String unique, String email);
 
-	public int update(Truck truck);
+//	public int update(String name, String open, String close, String comment, MultipartFile file, String unique,
+//			int id);
 
+	public int update(String tid, String name, String open, String close, String lat, String lng, String comment,
+			String address, String file, String email);
+
+	public int update2(String tid, String name, String open, String close, String lat, String lng, String comment,
+			String address, MultipartFile file, String unique, String email);
 	// 트럭 위치 정보 수정 (위도, 경도 사용)
 	// public int updateTruckLocation(Truck truck);
 
@@ -32,7 +38,5 @@ public interface TruckRepository {
 
 	// 사업자 아이디로 자기 트럭찾기
 	public Truck findOneByMember(String tMember);
-	
-	
 
 }

@@ -27,7 +27,7 @@ public class FoodRepositoryImpl implements FoodRepository{
 			f.setFName(rs.getString("f_name"));
 			f.setFPrice(rs.getString("f_price"));
 			f.setFDescription(rs.getString("f_description"));
-			f.setFImage("localhost:8080/image/" + rs.getString("f_image"));
+			f.setFImage(rs.getString("f_image"));
 			f.setFTruck(rs.getInt("f_truck"));
 			
 			return f;

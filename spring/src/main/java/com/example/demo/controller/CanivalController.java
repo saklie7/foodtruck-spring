@@ -49,10 +49,24 @@ public class CanivalController {
 	}
 	
 	// update
-	@PostMapping("/update")
-	public Object modify(@RequestBody Canival canival) {
-		canivalRepository.update(canival);
-		return canivalRepository.selectById(canival.getCId());
+	@PostMapping("/update/{cId}")
+	public Object modify(
+			@PathVariable int cId,
+			@RequestParam("cTitle") String cTitle, 
+			@RequestParam("cContent") String cContent,
+			@RequestParam("cSdate") String cSdate,
+			@RequestParam("cEdate") String cEdate,
+			@RequestParam("cImage") MultipartFile cImage
+			) {
+		try {
+			System.out.println("수정전");
+			storageService.store(cId, cTitle, cContent, cImage, cSdate, cEdate);
+			System.out.println("수정완료");
+		} catch (Exception e) {
+			
+		}
+		
+		return canivalRepository.selectById(cId);
 	}
 
 	// delete
@@ -69,10 +83,9 @@ public class CanivalController {
 	}
 	
 	// findOneByTitle : 글내용 상세뷰
-	@GetMapping("/view/{cId}")
-	public Canival getTitle(@PathVariable int cId) {
-		System.out.println(cId);
-		return canivalRepository.selectById(cId);
-	}
-	
+   @GetMapping("/view/{cId}")
+   public Canival getTitle(@PathVariable int cId) {
+      canivalRepository.increment(cId);
+      return canivalRepository.selectById(cId);
+   }
 }

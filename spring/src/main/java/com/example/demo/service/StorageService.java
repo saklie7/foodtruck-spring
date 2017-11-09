@@ -5,7 +5,6 @@ import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Random;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +14,7 @@ import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.demo.domain.Canival;
 import com.example.demo.repository.CanivalRepositoryImpl;
 import com.example.demo.repository.FoodRepositoryImpl;
 import com.example.demo.repository.ReviewRepositoryImpl;
@@ -31,18 +31,18 @@ public class StorageService {
 	private FoodRepositoryImpl foodRepository;
 	@Autowired
 	private CanivalRepositoryImpl canivalRepository;
-	
+
 	Logger log = LoggerFactory.getLogger(this.getClass().getName());
 	private final Path rootLocation = Paths.get("src/main/webapp/image");
-	
+
 	// 트럭 insert
 	public void store(String name, String open, String close, String lat, String lng, String comment, String address,
 			MultipartFile file, String email) throws IOException {
 		long i = System.currentTimeMillis();
-		
+
 		try {
 			String unique = String.valueOf(i);
-			System.out.println("unique="+unique);
+			System.out.println("unique=" + unique);
 			Path file2 = rootLocation.resolve(unique + file.getOriginalFilename());
 			Resource resource = new UrlResource(file2.toUri());
 			System.out.println("resource=" + resource);
@@ -55,12 +55,32 @@ public class StorageService {
 			throw new RuntimeException("FAIL!");
 		}
 	}
-	
-	//리뷰 insert
-	public void store(String comment, MultipartFile image, String score, String email, int truck)
-			throws IOException {
+
+	// 트럭 update
+	public void truckupdate(String tid, String name, String open, String close, String lat, String lng, String comment,
+			String address, MultipartFile file, String email) throws IOException {
 		long i = System.currentTimeMillis();
-		
+
+		try {
+			String unique = String.valueOf(i);
+			System.out.println("unique=" + unique);
+			Path file2 = rootLocation.resolve(unique + file.getOriginalFilename());
+			Resource resource = new UrlResource(file2.toUri());
+			System.out.println("resource=" + resource);
+
+			Files.copy(file.getInputStream(), rootLocation.resolve(unique + file.getOriginalFilename()));
+
+			truckRepository.update2(tid, name, open, close, lat, lng, comment, address, file, unique, email);
+		} catch (Exception e) {
+			System.out.println("중복중복!!");
+			throw new RuntimeException("FAIL!");
+		}
+	}
+
+	// 리뷰 insert
+	public void store(String comment, MultipartFile image, String score, String email, int truck) throws IOException {
+		long i = System.currentTimeMillis();
+
 		try {
 			String unique = String.valueOf(i);
 			Path file = rootLocation.resolve(unique + image.getOriginalFilename());
@@ -73,11 +93,11 @@ public class StorageService {
 			throw new RuntimeException("FAIL!");
 		}
 	}
-	
-	//푸드 insert
-	public void foodStore(String name, String price, String comment ,MultipartFile file, int truck) throws IOException {
+
+	// 푸드 insert
+	public void foodStore(String name, String price, String comment, MultipartFile file, int truck) throws IOException {
 		long i = System.currentTimeMillis();
-		
+
 		try {
 			String unique = String.valueOf(i);
 			System.out.println("filename = " + file.getOriginalFilename());
@@ -89,9 +109,10 @@ public class StorageService {
 			throw new RuntimeException("FAIL!");
 		}
 	}
-	
-	//푸드 update
-	public void foodStore(int id, String name, String price, String description, MultipartFile image) throws IOException {
+
+	// 푸드 update
+	public void foodStore(int id, String name, String price, String description, MultipartFile image)
+			throws IOException {
 		long i = System.currentTimeMillis();
 		try {
 			String unique = String.valueOf(i);
@@ -105,23 +126,6 @@ public class StorageService {
 		}
 	}
 
-//	// 축제 insert
-//	public void store(String title, String content, MultipartFile image, String sdate, String edate, int viewcnt)
-//			throws IOException {
-//		long i = System.currentTimeMillis();
-//
-//		try {
-//			String unique = String.valueOf(i);
-//			System.out.println("filename = " + image.getOriginalFilename());
-//			Files.copy(image.getInputStream(), rootLocation.resolve(unique + image.getOriginalFilename()));
-//			canivalRepository.insert(title, content, image, unique, sdate, edate, viewcnt);
-//
-//		} catch (Exception e) {
-//			System.out.println("중복중복!!");
-//			throw new RuntimeException("FAIL!");
-//		}
-//	}
-	
 	// 축제 insert
 	public void store(String title, String content, MultipartFile image, String sdate, String edate)
 			throws IOException {
@@ -134,6 +138,31 @@ public class StorageService {
 
 		} catch (Exception e) {
 			System.out.println("중복중복!!");
+			throw new RuntimeException("FAIL!");
+		}
+	}
+
+	// 축제 update
+	public void store(int cId, String cTitle, String cContent, MultipartFile cImage, String cSdate, String cEdate)
+			throws IOException {
+		long i = System.currentTimeMillis();
+
+		try {
+			String unique = String.valueOf(i);
+			System.out.println("filename = " + cImage.getOriginalFilename());
+			Files.copy(cImage.getInputStream(), rootLocation.resolve(unique + cImage.getOriginalFilename()));
+
+			Canival canival = new Canival();
+			canival.setCId(cId);
+			canival.setCTitle(cTitle);
+			canival.setCContent(cContent);
+			canival.setCImage(unique + cImage.getOriginalFilename());
+			canival.setCSdate(cSdate);
+			canival.setCEdate(cEdate);
+
+			canivalRepository.update(canival);
+		} catch (Exception e) {
+			System.out.println("실패");
 			throw new RuntimeException("FAIL!");
 		}
 	}

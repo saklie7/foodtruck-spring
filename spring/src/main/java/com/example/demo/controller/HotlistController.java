@@ -26,10 +26,10 @@ public class HotlistController {
 
 	@PostMapping("/post")
 	public Hotlist add(@RequestBody Hotlist hotlist) {
-		//중복체크
+		// 중복체크
 		Hotlist resultHotlist = checkService.checkDuplicate(hotlist);
-//		System.out.println("Controller # hotlist="+resultHotlist);
-		
+		// System.out.println("Controller # hotlist="+resultHotlist);
+
 		if (resultHotlist.getHError() == null) {
 			hotlistRepository.insert(resultHotlist);
 			return resultHotlist;
@@ -37,24 +37,30 @@ public class HotlistController {
 			return resultHotlist;
 		}
 	}
-	
+
 	@DeleteMapping("/{hId}")
 	public String remove(@PathVariable int hId) {
 		int num = hotlistRepository.delete(hId);
-//		System.out.println("num="+num);
+		// System.out.println("num="+num);
 		if (num == 1) {
 			return "success";
 		} else {
 			return "fail";
 		}
 	}
-	
-	//나의 즐겨찾기 조회
+
+	// 나의 즐겨찾기 조회
 	@GetMapping("/{hMember:.+}")
 	public List<Hotlisttruck> getAllByMember(@PathVariable String hMember) {
 		return hotlistRepository.findAllByMember(hMember);
 	}
-	
-	
+
+	@GetMapping("/check/{hMember:.+}/{tId}")
+	public Hotlist getAllByMember2(@PathVariable String hMember, @PathVariable int tId) {
+		System.out.println(hMember);
+		System.out.println(tId);
+		// System.out.println(hotlistRepository.findAllByMember2(hMember, tId));
+		return hotlistRepository.findAllByMember2(hMember, tId);
+	}
 
 }

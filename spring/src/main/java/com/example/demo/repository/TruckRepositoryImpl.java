@@ -27,7 +27,7 @@ public class TruckRepositoryImpl implements TruckRepository {
 			Truck t = new Truck();
 			t.setTId(rs.getInt("t_id"));
 			t.setTName(rs.getString("t_name"));
-			t.setTImage("localhost:8080/image/" + rs.getString("t_image"));
+			t.setTImage(rs.getString("t_image"));
 			t.setTAvg(rs.getDouble("t_avg"));
 			t.setTComment(rs.getString("t_comment"));
 			t.setTOpen(rs.getString("t_open"));
@@ -49,16 +49,31 @@ public class TruckRepositoryImpl implements TruckRepository {
 				comment, unique + file.getOriginalFilename(), email);
 	}
 
+//	@Override
+//	public int update(String name, String open, String close, String comment, MultipartFile file, String unique,
+//			int id) {
+//		String sql = "update truck " + "set t_name=?, t_open=?, t_close=?, t_comment=?, " + "t_image=? where t_id=?";
+//		return jdbcTemplate.update(sql, name, open, close, comment, unique + file.getOriginalFilename(), id);
+//	}
+
 	@Override
-	public int update(Truck truck) {
-		String sql = "update truck "+ 
-		"set t_name=?, t_image=?, t_comment=?, t_open=?, "+ 
-		"t_close=?, t_lat=?, t_lng=?, t_address, t_foodmaterial=? "+
-		"where t_id=?";
-		return jdbcTemplate.update(sql, truck.getTName(), truck.getTImage(), truck.getTComment(), truck.getTOpen(), 
-					truck.getTClose(), truck.getTLat(), truck.getTLng(), truck.getTAddress(), truck.getTFoodmaterial(), truck.getTId());
+	public int update(String tid, String name, String open, String close, String lat, String lng, String comment,
+			String address, String file, String email) {
+		String sql = "update truck " + "set t_name=?, t_image=?, t_comment=?, t_open=?, "
+				+ "t_close=?, t_lat=?, t_lng=?, t_address= ? " + "where t_id=?";
+		return jdbcTemplate.update(sql, name, file, comment, open, close, Double.parseDouble(lat),
+				Double.parseDouble(lng), address, tid);
 	}
-	
+
+	@Override
+	public int update2(String tid, String name, String open, String close, String lat, String lng, String comment,
+			String address, MultipartFile file, String unique, String email) {
+		String sql = "update truck " + "set t_name=?, t_image=?, t_comment=?, t_open=?, "
+				+ "t_close=?, t_lat=?, t_lng=?, t_address= ? " + "where t_id=?";
+		return jdbcTemplate.update(sql, name, unique + file.getOriginalFilename(), comment, open, close,
+				Double.parseDouble(lat), Double.parseDouble(lng), address, tid);
+	}
+
 	@Override
 	public int updateAvg(int tId) {
 		String sql = "update truck set t_avg = (select round(avg(r_score), 1) from review where r_truck=?) where t_id=?";
@@ -97,7 +112,7 @@ public class TruckRepositoryImpl implements TruckRepository {
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		}
-		
+
 	}
 
 }

@@ -44,8 +44,9 @@ public class CanivalRepositoryImpl implements CanivalRepository {
 
 	@Override
 	public int update(Canival canival) {
-		String sql = "update canival set c_title =?, c_image =?, c_sdate =?, c_edate =? where c_id =?";
-		return 0;
+		String sql = "update canival set c_title =?, c_content =?, c_image =?, c_sdate =?, c_edate =? where c_id =?";
+		return jdbcTemplate.update(sql, canival.getCTitle(), canival.getCContent(), canival.getCImage(),
+				canival.getCSdate(), canival.getCEdate(), canival.getCId());
 	}
 
 	@Override
@@ -59,19 +60,19 @@ public class CanivalRepositoryImpl implements CanivalRepository {
 		String sql = "select * from canival order by c_edate desc";
 		return jdbcTemplate.query(sql, rowMapper);
 	}
-	
+
 	@Override
 	public Canival selectById(int cId) {
 		String sql = "select * from canival where c_id = ?";
 		return jdbcTemplate.queryForObject(sql, rowMapper, cId);
 	}
-	
+
 	@Override
 	public Canival selectByMaxId() {
 		String sql = "select * from canival where c_id=(select max(c_id) from canival)";
 		return jdbcTemplate.queryForObject(sql, rowMapper);
 	}
-	
+
 	@Override
 	public int increment(int cId) {
 		String sql = "update canival set c_viewcnt = c_viewcnt + 1 where c_id = ?";
