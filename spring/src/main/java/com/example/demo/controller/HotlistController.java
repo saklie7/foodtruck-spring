@@ -59,7 +59,7 @@ public class HotlistController {
 	public Hotlist getAllByMember2(@PathVariable String hMember, @PathVariable int tId) {
 		System.out.println(hMember);
 		System.out.println(tId);
-		// System.out.println(hotlistRepository.findAllByMember2(hMember, tId));
+		 System.out.println("즐찾::::"+hotlistRepository.findAllByMember2(hMember, tId));
 		return hotlistRepository.findAllByMember2(hMember, tId);
 	}
 
