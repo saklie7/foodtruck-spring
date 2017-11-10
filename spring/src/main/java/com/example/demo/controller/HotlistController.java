@@ -55,10 +55,10 @@ public class HotlistController {
 		return hotlistRepository.findAllByMember(hMember);
 	}
 
-	@GetMapping("/check/{hMember:.+}/{tId}")
+	@GetMapping("/check/{tId}/{hMember:.+}")
 	public Hotlist getAllByMember2(@PathVariable String hMember, @PathVariable int tId) {
-		System.out.println(hMember);
-		System.out.println(tId);
+		System.out.println("getAllByMember2 # member="+hMember);
+		System.out.println("getAllByMember2 # tid="+tId);
 		 System.out.println("즐찾::::"+hotlistRepository.findAllByMember2(hMember, tId));
 		return hotlistRepository.findAllByMember2(hMember, tId);
 	}

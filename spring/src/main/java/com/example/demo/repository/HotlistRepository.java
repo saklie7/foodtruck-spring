@@ -30,4 +30,8 @@ public interface HotlistRepository {
 	@Select("select * from hotlist where h_member=#{hMember} && h_truck=#{tId}")
 	public Hotlist findAllByMember2(@Param("hMember") String hMember, @Param("tId") int tId);
 
+	//min
+	@Select("select count(*) from hotlist where h_member=#{hMember} && h_truck=#{tId}")
+	public int findAllByMember3(@Param("hMember") String hMember, @Param("tId") int tId);
+
 }

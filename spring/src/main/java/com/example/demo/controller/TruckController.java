@@ -65,69 +65,67 @@ public class TruckController {
 	
 	//트럭 정보수정
 	@PostMapping("/trucks/post2")
-	   public ResponseEntity<String> handleFileUpload2(
-	         @RequestParam("tid") String tid,
-	         @RequestParam("name") String name,
-	         @RequestParam("open") String open,
-	         @RequestParam("close") String close,
-	         @RequestParam("lat") String lat,
-	         @RequestParam("lng") String lng,
-	         @RequestParam("comment") String comment,
-	         @RequestParam("address") String address,
-	         @RequestParam("file") String file,
-	         @RequestParam("email") String email
-	         ) {
-	      System.out.println("푸드트럭 컨트롤러 POST");
-	      System.out.println(name);
-	      System.out.println(open);
-	      System.out.println(close);
-	      System.out.println(lat);
-	      System.out.println(lng);
-	      System.out.println(comment);
-	      System.out.println(address);
-	      System.out.println(file);
-	      System.out.println(email);
-	      
-//	      truckRepository.insert(name, open, close, lat, lng, file);
-	         truckRepository.update(tid, name, open, close, lat, lng, comment, address, file, email);
-	      return null;
-	   }
+	public ResponseEntity<String> handleFileUpload2(
+			@RequestParam("tid") String tid, 
+			@RequestParam("name") String name,
+			@RequestParam("open") String open, 
+			@RequestParam("close") String close, 
+			@RequestParam("lat") String lat,
+			@RequestParam("lng") String lng, 
+			@RequestParam("comment") String comment,
+			@RequestParam("address") String address, 
+			@RequestParam("file") String file,
+			@RequestParam("email") String email) {
+		System.out.println("푸드트럭 컨트롤러 POST");
+		System.out.println(name);
+		System.out.println(open);
+		System.out.println(close);
+		System.out.println(lat);
+		System.out.println(lng);
+		System.out.println(comment);
+		System.out.println(address);
+		System.out.println(file);
+		System.out.println(email);
+
+		// truckRepository.insert(name, open, close, lat, lng, file);
+		truckRepository.update(tid, name, open, close, lat, lng, comment, address, file, email);
+		return null;
+	}
 	   
-	   @PostMapping("/trucks/post3")
-	   public ResponseEntity<String> handleFileUpload3(
-	         @RequestParam("tid") String tid,
-	         @RequestParam("name") String name,
-	         @RequestParam("open") String open,
-	         @RequestParam("close") String close,
-	         @RequestParam("lat") String lat,
-	         @RequestParam("lng") String lng,
-	         @RequestParam("comment") String comment,
-	         @RequestParam("address") String address,
-	         @RequestParam("file") MultipartFile file,
-	         @RequestParam("email") String email
-	         ) {
-	      System.out.println("푸드트럭 컨트롤러 POST");
-	      System.out.println(name);
-	      System.out.println(open);
-	      System.out.println(close);
-	      System.out.println(lat);
-	      System.out.println(lng);
-	      System.out.println(comment);
-	      System.out.println(address);
-	      System.out.println(file);
-	      System.out.println(email);
-	      
-	      try {
-	         System.out.println("-----------try------");
-	         storageService.truckupdate(tid ,name, open, close, lat, lng, comment, address, file, email);
-	      } catch (IOException e) {
-	         System.out.println("-----------catch------");
-	         e.printStackTrace();
-	      }
-	      
-	         
-	      return null;
-	   }
+	//이미지 포함
+   @PostMapping("/trucks/post3")
+   public ResponseEntity<String> handleFileUpload3(
+         @RequestParam("tid") String tid,
+         @RequestParam("name") String name,
+         @RequestParam("open") String open,
+         @RequestParam("close") String close,
+         @RequestParam("lat") String lat,
+         @RequestParam("lng") String lng,
+         @RequestParam("comment") String comment,
+         @RequestParam("address") String address,
+         @RequestParam("file") MultipartFile file,
+         @RequestParam("email") String email
+         ) {
+      System.out.println("푸드트럭 컨트롤러 POST");
+      System.out.println(name);
+      System.out.println(open);
+      System.out.println(close);
+      System.out.println(lat);
+      System.out.println(lng);
+      System.out.println(comment);
+      System.out.println(address);
+      System.out.println(file);
+      System.out.println(email);
+      
+      try {
+         System.out.println("-----------try------");
+         storageService.truckupdate(tid ,name, open, close, lat, lng, comment, address, file, email);
+      } catch (IOException e) {
+         System.out.println("-----------catch------");
+         e.printStackTrace();
+      }
+      return null;
+   }
 	
 	@DeleteMapping("/trucks/{tId}")
 	public int remove(@PathVariable int tId) {
@@ -157,13 +155,12 @@ public class TruckController {
 		return truckRepository.findOneById(tId);
 	}
 	
+	//사장tMember가 가지고 있는 트럭정보
 	@GetMapping("/trucks/member/{tMember:.+}")
 	public Object getTruckByMember(@PathVariable String tMember) {
 //		truckRepository.findOneByMember(tMember);
-		System.out.println("tttttt");
 		Truck t =  truckRepository.findOneByMember(tMember);
 		if(t == null) {
-			System.out.println("tttttt");
 			return "0";
 		} else {
 			return t;
