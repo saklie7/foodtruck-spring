@@ -24,6 +24,7 @@
 		<java.version>1.8</java.version>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
+		<jetty.maven.plugin>9.4.3.v20170317</jetty.maven.plugin>
 	</properties>
 
 	<dependencies>
@@ -82,20 +83,21 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<version>1.5.8.RELEASE</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>repackage</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
+			<plugin>                          <!-- Used for local debugging -->
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>${jetty.maven.plugin}</version>
+			</plugin>
+
 			<plugin>
 				<groupId>com.google.cloud.tools</groupId>
 				<artifactId>appengine-maven-plugin</artifactId>
-				<version>1.3.2</version>
+				<version>${appengine.maven.plugin}</version>
 				<configuration>
 					<!-- deploy configuration -->
+					<!-- <deploy.promote>true</deploy.promote> <!~~ DEFAULT value ~~> <deploy.stopPreviousVersion>true</deploy.stopPreviousVersion> 
+						<!~~ DEFAULT value ~~> -->
 				</configuration>
 			</plugin>
 		</plugins>
