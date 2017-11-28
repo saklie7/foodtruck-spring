@@ -93,7 +93,7 @@
 			<plugin>
 				<groupId>com.google.cloud.tools</groupId>
 				<artifactId>appengine-maven-plugin</artifactId>
-				<version>${appengine.maven.plugin}</version>
+				<version>1.9.15</version>
 				<configuration>
 					<!-- deploy configuration -->
 					<!-- <deploy.promote>true</deploy.promote> <!~~ DEFAULT value ~~> <deploy.stopPreviousVersion>true</deploy.stopPreviousVersion> 
