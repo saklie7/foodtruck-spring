@@ -22,9 +22,10 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
-		<jetty.maven.plugin>9.4.3.v20170317</jetty.maven.plugin>
+		<maven.compiler.source>${java.version}</maven.compiler.source> <!-- REQUIRED -->
+		<maven.compiler.target>${java.version}</maven.compiler.target> <!-- REQUIRED -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<appengine.maven.plugin>1.3.2</appengine.maven.plugin>
 	</properties>
 
 	<dependencies>
@@ -82,25 +83,22 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<version>1.5.8.RELEASE</version>
+				<version>1.5.7.RELEASE</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
-			<plugin>                          <!-- Used for local debugging -->
-				<groupId>org.eclipse.jetty</groupId>
-				<artifactId>jetty-maven-plugin</artifactId>
-				<version>${jetty.maven.plugin}</version>
-			</plugin>
-
+			<!-- START plugin -->
 			<plugin>
 				<groupId>com.google.cloud.tools</groupId>
 				<artifactId>appengine-maven-plugin</artifactId>
-				<version>1.9.15</version>
-				<configuration>
-					<!-- deploy configuration -->
-					<!-- <deploy.promote>true</deploy.promote> <!~~ DEFAULT value ~~> <deploy.stopPreviousVersion>true</deploy.stopPreviousVersion> 
-						<!~~ DEFAULT value ~~> -->
-				</configuration>
+				<version>${appengine.maven.plugin}</version>
 			</plugin>
+			<!-- END plugin -->
 		</plugins>
 	</build>
-
 </project>
