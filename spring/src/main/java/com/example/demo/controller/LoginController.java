@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,14 +27,14 @@ public class LoginController {
 
 	@PostMapping("/login")
 	public Object postMemberLogin(@RequestBody Login login, HttpSession session) {
-		 System.out.println("1 : "+login);
+		 System.out.println("1 Login : "+login);
 		 loginService.authenticate(login);
 		
 		 Member member = new Member();
 		
 		if (login.getMError() == null) {
 			member = memberRepository.findOneByEmail(login.getMEmail());
-			System.out.println("loginController # member 함: " + member);
+			System.out.println("loginController # login 함: " + member);
 			session.setAttribute("member", member);
 			return session.getAttribute("member");
 		}
@@ -45,7 +46,7 @@ public class LoginController {
 	@GetMapping("/logout")
 	public String getLogout(HttpSession session) {
 		session.removeAttribute("member");
-		return "server logout";
+		return "logout";
 	}
 
 }
